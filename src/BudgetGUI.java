@@ -66,7 +66,7 @@ public class BudgetGUI extends javax.swing.JFrame {
         sidebarPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 59, 12));
 
         dashboardButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dashboard_36.png"))); // NOI18N
+        dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dashboard.png"))); // NOI18N
         dashboardButton.setBorderPainted(false);
         dashboardButton.setContentAreaFilled(false);
         dashboardButton.addActionListener(new java.awt.event.ActionListener() {
@@ -198,6 +198,10 @@ public class BudgetGUI extends javax.swing.JFrame {
         tabbedPane.setSelectedIndex(0);
     }//GEN-LAST:event_dashboardButtonActionPerformed
 
+    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
+        tabbedPane.setSelectedIndex(4);
+    }//GEN-LAST:event_settingsButtonActionPerformed
+
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
         // Toggle the sidebar panel's preferred size when the menu button is clicked
         if (sidebarPanel.getPreferredSize().width == 60) {
@@ -209,10 +213,6 @@ public class BudgetGUI extends javax.swing.JFrame {
         revalidate();
         pack();
     }//GEN-LAST:event_menuButtonActionPerformed
-
-    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        tabbedPane.setSelectedIndex(4);
-    }//GEN-LAST:event_settingsButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton budgetButton;
