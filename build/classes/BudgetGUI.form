@@ -365,6 +365,12 @@
                 <Property name="text" type="java.lang.String" value="Food"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="foodButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="foodButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="600" y="10" width="-1" height="-1"/>
@@ -379,6 +385,12 @@
                 <Property name="text" type="java.lang.String" value="Entertainment"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="entertainmentButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="entertainmentButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="490" y="10" width="-1" height="-1"/>
@@ -393,6 +405,12 @@
                 <Property name="text" type="java.lang.String" value="Travel"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="travelButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="travelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="680" y="10" width="-1" height="-1"/>
@@ -420,6 +438,12 @@
                 <Property name="text" type="java.lang.String" value="Housing"/>
                 <Property name="borderPainted" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="housingButtonActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="housingButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="760" y="10" width="-1" height="-1"/>
@@ -440,7 +464,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+            <Container class="javax.swing.JScrollPane" name="entertainmentScrollPane">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
@@ -454,42 +478,40 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="entertainmentTable">
                   <Properties>
+                    <Property name="autoCreateRowSorter" type="boolean" value="true"/>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="6">
+                      <Table columnCount="4" rowCount="5">
                         <Column editable="true" title="Expense" type="java.lang.Object">
                           <Data value="Amusement Park"/>
                           <Data value="Concert"/>
                           <Data value="Hotel stay"/>
                           <Data value="Games"/>
                           <Data value="Party"/>
-                          <Data value="null"/>
                         </Column>
                         <Column editable="true" title="Budget" type="java.lang.Object">
-                          <Data value=""/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
                         </Column>
                         <Column editable="true" title="Actual Spent" type="java.lang.Object">
-                          <Data value=""/>
-                          <Data value="null"/>
-                          <Data value=""/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
                         </Column>
                         <Column editable="true" title="Difference" type="java.lang.Object">
-                          <Data value=""/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
+                          <Data value="$"/>
                         </Column>
                       </Table>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Double-click to edit data"/>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
@@ -514,34 +536,47 @@
                         </Column>
                       </TableColumnModel>
                     </Property>
+                    <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+                      <Color id="Text Cursor"/>
+                    </Property>
+                    <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="49" green="0" red="70" type="rgb"/>
+                    </Property>
+                    <Property name="inheritsPopupMenu" type="boolean" value="true"/>
+                    <Property name="name" type="java.lang.String" value="" noResource="true"/>
+                    <Property name="selectionMode" type="int" value="1"/>
                     <Property name="showGrid" type="boolean" value="true"/>
+                    <Property name="surrendersFocusOnKeystroke" type="boolean" value="true"/>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                      <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="filterButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="99" red="cc" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="SORT"/>
+                <Property name="text" type="java.lang.String" value="FILTER"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="filterButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="20" y="550" width="-1" height="-1"/>
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+            <Container class="javax.swing.JScrollPane" name="foodScrollPane">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="70" width="570" height="450"/>
+                  <AbsoluteConstraints x="20" y="70" width="600" height="450"/>
                 </Constraint>
               </Constraints>
 
@@ -550,19 +585,15 @@
                 <Component class="javax.swing.JTable" name="foodTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="6">
+                      <Table columnCount="4" rowCount="4">
                         <Column editable="true" title="Expense" type="java.lang.Object">
                           <Data value="Breakfast"/>
                           <Data value="Lunch"/>
                           <Data value="Dinner"/>
                           <Data value="Drinks"/>
-                          <Data value=""/>
-                          <Data value="null"/>
                         </Column>
                         <Column editable="true" title="Budget" type="java.lang.Object">
                           <Data value=""/>
-                          <Data value="null"/>
-                          <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -572,13 +603,9 @@
                           <Data value="null"/>
                           <Data value=""/>
                           <Data value="null"/>
-                          <Data value="null"/>
-                          <Data value="null"/>
                         </Column>
                         <Column editable="true" title="Difference" type="java.lang.Object">
                           <Data value=""/>
-                          <Data value="null"/>
-                          <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -617,13 +644,13 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+            <Container class="javax.swing.JScrollPane" name="travelScrollPane">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="70" width="570" height="450"/>
+                  <AbsoluteConstraints x="20" y="70" width="600" height="450"/>
                 </Constraint>
               </Constraints>
 
@@ -632,18 +659,16 @@
                 <Component class="javax.swing.JTable" name="travelTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="6">
+                      <Table columnCount="4" rowCount="5">
                         <Column editable="true" title="Expense" type="java.lang.Object">
                           <Data value="Flight"/>
                           <Data value="Fuel"/>
                           <Data value="Taxi fare"/>
                           <Data value="Bus fare"/>
                           <Data value="Parking"/>
-                          <Data value="null"/>
                         </Column>
                         <Column editable="true" title="Budget" type="java.lang.Object">
                           <Data value=""/>
-                          <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -655,11 +680,9 @@
                           <Data value=""/>
                           <Data value="null"/>
                           <Data value="null"/>
-                          <Data value="null"/>
                         </Column>
                         <Column editable="true" title="Difference" type="java.lang.Object">
                           <Data value=""/>
-                          <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -699,13 +722,13 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JScrollPane" name="jScrollPane4">
+            <Container class="javax.swing.JScrollPane" name="housingScrollPane">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="20" y="70" width="570" height="450"/>
+                  <AbsoluteConstraints x="20" y="70" width="600" height="450"/>
                 </Constraint>
               </Constraints>
 
@@ -714,7 +737,7 @@
                 <Component class="javax.swing.JTable" name="housingTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="4" rowCount="9">
+                      <Table columnCount="4" rowCount="8">
                         <Column editable="true" title="Expense" type="java.lang.Object">
                           <Data value=" Rent/Mortgage"/>
                           <Data value="Taxes"/>
@@ -724,11 +747,9 @@
                           <Data value="Cable/Internet services"/>
                           <Data value="Insurance"/>
                           <Data value="Maintenance"/>
-                          <Data value="null"/>
                         </Column>
                         <Column editable="true" title="Budget" type="java.lang.Object">
                           <Data value=""/>
-                          <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -746,11 +767,9 @@
                           <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
-                          <Data value="null"/>
                         </Column>
                         <Column editable="true" title="Difference" type="java.lang.Object">
                           <Data value=""/>
-                          <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
                           <Data value="null"/>
@@ -793,7 +812,19 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="com.toedter.calendar.JCalendar" name="jCalendar1">
+            <Component class="com.toedter.calendar.JCalendar" name="calendar">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Select a date"/>
+                <Property name="date" type="java.util.Date" editor="org.netbeans.beaninfo.editors.DateEditor">
+                  <SerializedValue value="-84,-19,0,5,115,114,0,14,106,97,118,97,46,117,116,105,108,46,68,97,116,101,104,106,-127,1,75,89,116,25,3,0,0,120,112,119,8,0,0,1,-121,116,126,115,-24,120"/>
+                </Property>
+                <Property name="decorationBackgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="de" green="ff" red="69" type="rgb"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="calendar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="640" y="100" width="240" height="150"/>
@@ -813,7 +844,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Component class="javax.swing.JButton" name="adddataButton">
+            <Component class="javax.swing.JButton" name="addDataButton">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="33" type="rgb"/>
@@ -821,8 +852,11 @@
                 <Property name="text" type="java.lang.String" value="ADD DATA"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adddataButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addDataButtonActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="addDataButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="130" y="550" width="-1" height="-1"/>
@@ -836,6 +870,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="DELETE"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="deleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="260" y="550" width="-1" height="-1"/>
