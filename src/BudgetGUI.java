@@ -1,6 +1,8 @@
 import java.awt.Cursor;
 import java.awt.Dimension;
 
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +17,31 @@ public class BudgetGUI extends javax.swing.JFrame {
     public BudgetGUI() {
         initComponents();
         setVisible(true);
+    }
+    
+    private void clearTables() {
+        entertainmentScrollPane.setVisible(false);
+        entertainmentTable.setVisible(false);
+        foodScrollPane.setVisible(false);
+        foodTable.setVisible(false);
+        travelScrollPane.setVisible(false);
+        travelTable.setVisible(false);
+        housingScrollPane.setVisible(false);
+        housingTable.setVisible(false);
+    }
+    
+    private JTable visibleTable() {
+        if (housingTable.isVisible()) {
+            return housingTable;
+        } else if (foodTable.isVisible()) {
+            return foodTable;
+        } else if (entertainmentTable.isVisible()) {
+            return entertainmentTable;
+        } else if (travelTable.isVisible()) {
+            return travelTable;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -51,18 +78,18 @@ public class BudgetGUI extends javax.swing.JFrame {
         expensesLabel = new javax.swing.JLabel();
         housingButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        entertainmentScrollPane = new javax.swing.JScrollPane();
         entertainmentTable = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        filterButton = new javax.swing.JButton();
+        foodScrollPane = new javax.swing.JScrollPane();
         foodTable = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        travelScrollPane = new javax.swing.JScrollPane();
         travelTable = new javax.swing.JTable();
-        jScrollPane4 = new javax.swing.JScrollPane();
+        housingScrollPane = new javax.swing.JScrollPane();
         housingTable = new javax.swing.JTable();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        calendar = new com.toedter.calendar.JCalendar();
         jLabel1 = new javax.swing.JLabel();
-        adddataButton = new javax.swing.JButton();
+        addDataButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -191,28 +218,52 @@ public class BudgetGUI extends javax.swing.JFrame {
         expensesPanel.setBackground(new java.awt.Color(255, 255, 255));
         expensesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        foodButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         foodButton.setBackground(new java.awt.Color(255, 204, 204));
         foodButton.setText("Food");
         foodButton.setBorderPainted(false);
+        foodButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                foodButtonActionPerformed(evt);
+            }
+        });
         expensesPanel.add(foodButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, -1, -1));
 
+        entertainmentButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         entertainmentButton.setBackground(new java.awt.Color(204, 255, 255));
         entertainmentButton.setText("Entertainment");
         entertainmentButton.setBorderPainted(false);
+        entertainmentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                entertainmentButtonActionPerformed(evt);
+            }
+        });
         expensesPanel.add(entertainmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
 
+        travelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         travelButton.setBackground(new java.awt.Color(255, 255, 153));
         travelButton.setText("Travel");
         travelButton.setBorderPainted(false);
+        travelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                travelButtonActionPerformed(evt);
+            }
+        });
         expensesPanel.add(travelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, -1, -1));
 
         expensesLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         expensesLabel.setText("Expenses");
         expensesPanel.add(expensesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, 50));
 
+        housingButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         housingButton.setBackground(new java.awt.Color(205, 204, 255));
         housingButton.setText("Housing");
         housingButton.setBorderPainted(false);
+        housingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                housingButtonActionPerformed(evt);
+            }
+        });
         expensesPanel.add(housingButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 10, -1, -1));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus.png"))); // NOI18N
@@ -220,45 +271,52 @@ public class BudgetGUI extends javax.swing.JFrame {
         jButton2.setContentAreaFilled(false);
         expensesPanel.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 0, 40, 40));
 
+        entertainmentTable.setAutoCreateRowSorter(true);
         entertainmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Amusement Park", "", "", ""},
-                {"Concert", null, null, null},
-                {"Hotel stay", null, "", null},
-                {"Games", null, null, null},
-                {"Party", null, null, null},
-                {null, null, null, null}
+                {"Amusement Park", "$", "$", "$"},
+                {"Concert", "$", "$", "$"},
+                {"Hotel stay", "$", "$", "$"},
+                {"Games", "$", "$", "$"},
+                {"Party", "$", "$", "$"}
             },
             new String [] {
                 "Expense", "Budget", "Actual Spent", "Difference"
             }
         ));
+        entertainmentTable.setToolTipText("Double-click to edit data");
+        entertainmentTable.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        entertainmentTable.setGridColor(new java.awt.Color(112, 0, 73));
+        entertainmentTable.setInheritsPopupMenu(true);
+        entertainmentTable.setName(""); // NOI18N
+        entertainmentTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         entertainmentTable.setShowGrid(true);
-        jScrollPane1.setViewportView(entertainmentTable);
+        entertainmentTable.setSurrendersFocusOnKeystroke(true);
+        entertainmentTable.getTableHeader().setReorderingAllowed(false);
+        entertainmentScrollPane.setViewportView(entertainmentTable);
 
-        expensesPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
+        expensesPanel.add(entertainmentScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
 
-        jButton1.setBackground(new java.awt.Color(204, 153, 255));
-        jButton1.setText("SORT");
-        expensesPanel.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
+        filterButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        filterButton.setBackground(new java.awt.Color(204, 153, 255));
+        filterButton.setText("FILTER");
+        expensesPanel.add(filterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
 
         foodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Breakfast", "", "", ""},
                 {"Lunch", null, null, null},
                 {"Dinner", null, "", null},
-                {"Drinks", null, null, null},
-                {"", null, null, null},
-                {null, null, null, null}
+                {"Drinks", null, null, null}
             },
             new String [] {
                 "Expense", "Budget", "Actual Spent", "Difference"
             }
         ));
         foodTable.setShowGrid(true);
-        jScrollPane2.setViewportView(foodTable);
+        foodScrollPane.setViewportView(foodTable);
 
-        expensesPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 570, 450));
+        expensesPanel.add(foodScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
 
         travelTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -266,17 +324,16 @@ public class BudgetGUI extends javax.swing.JFrame {
                 {"Fuel", null, null, null},
                 {"Taxi fare", null, "", null},
                 {"Bus fare", null, null, null},
-                {"Parking", null, null, null},
-                {null, null, null, null}
+                {"Parking", null, null, null}
             },
             new String [] {
                 "Expense", "Budget", "Actual Spent", "Difference"
             }
         ));
         travelTable.setShowGrid(true);
-        jScrollPane3.setViewportView(travelTable);
+        travelScrollPane.setViewportView(travelTable);
 
-        expensesPanel.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 570, 450));
+        expensesPanel.add(travelScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
 
         housingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,32 +344,38 @@ public class BudgetGUI extends javax.swing.JFrame {
                 {"Electricity", null, null, null},
                 {"Cable/Internet services", null, null, null},
                 {"Insurance", null, null, null},
-                {"Maintenance", null, null, null},
-                {null, null, null, null}
+                {"Maintenance", null, null, null}
             },
             new String [] {
                 "Expense", "Budget", "Actual Spent", "Difference"
             }
         ));
         housingTable.setShowGrid(true);
-        jScrollPane4.setViewportView(housingTable);
+        housingScrollPane.setViewportView(housingTable);
 
-        expensesPanel.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 570, 450));
-        expensesPanel.add(jCalendar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 240, 150));
+        expensesPanel.add(housingScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
+
+        calendar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        calendar.setToolTipText("Select a date");
+        calendar.setDate(new java.util.Date(1681286657000L));
+        calendar.setDecorationBackgroundColor(new java.awt.Color(105, 255, 222));
+        expensesPanel.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 240, 150));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Select date:");
         expensesPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 100, 30));
 
-        adddataButton.setBackground(new java.awt.Color(51, 255, 255));
-        adddataButton.setText("ADD DATA");
-        adddataButton.addActionListener(new java.awt.event.ActionListener() {
+        addDataButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        addDataButton.setBackground(new java.awt.Color(51, 255, 255));
+        addDataButton.setText("ADD DATA");
+        addDataButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adddataButtonActionPerformed(evt);
+                addDataButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(adddataButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 550, -1, -1));
+        expensesPanel.add(addDataButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 550, -1, -1));
 
+        deleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         deleteButton.setBackground(new java.awt.Color(255, 0, 102));
         deleteButton.setText("DELETE");
         expensesPanel.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 550, -1, -1));
@@ -326,6 +389,9 @@ public class BudgetGUI extends javax.swing.JFrame {
 
     private void expensesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expensesButtonActionPerformed
         tabbedPane.setSelectedIndex(4);
+        clearTables();
+        entertainmentScrollPane.setVisible(true);
+        entertainmentTable.setVisible(true);
     }//GEN-LAST:event_expensesButtonActionPerformed
 
     private void incomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_incomeButtonActionPerformed
@@ -356,43 +422,67 @@ public class BudgetGUI extends javax.swing.JFrame {
         pack();
     }//GEN-LAST:event_menuButtonActionPerformed
 
-    private void adddataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adddataButtonActionPerformed
-        // Get the table model
-        DefaultTableModel model = (DefaultTableModel) housingTable.getModel();
-
+    private void addDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataButtonActionPerformed
+        // Get the currently visible table
+        JTable visibleTable = visibleTable();
+        // Get the table model of the visible table
+        DefaultTableModel model = (DefaultTableModel) visibleTable.getModel();
         // Create a new row of data to add to the table
         Object[] newRowData = {"New Expense", null, null, null};
-
         // Add the new row to the table model
         model.addRow(newRowData);
-    }//GEN-LAST:event_adddataButtonActionPerformed
+    }//GEN-LAST:event_addDataButtonActionPerformed
+
+    private void foodButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodButtonActionPerformed
+        clearTables();
+        foodScrollPane.setVisible(true);
+        foodTable.setVisible(true);
+    }//GEN-LAST:event_foodButtonActionPerformed
+
+    private void housingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_housingButtonActionPerformed
+        clearTables();
+        housingScrollPane.setVisible(true);
+        housingTable.setVisible(true);
+    }//GEN-LAST:event_housingButtonActionPerformed
+
+    private void travelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        clearTables();
+        travelScrollPane.setVisible(true);
+        travelTable.setVisible(true);
+    }  
+    
+    private void entertainmentButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        clearTables();
+        entertainmentScrollPane.setVisible(true);
+        entertainmentTable.setVisible(true);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adddataButton;
+    private javax.swing.JButton addDataButton;
     private javax.swing.JPanel budgetPanel;
+    private com.toedter.calendar.JCalendar calendar;
     private javax.swing.JButton dashboardButton;
     private javax.swing.JLabel dashboardLabel;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton entertainmentButton;
+    private javax.swing.JScrollPane entertainmentScrollPane;
     private javax.swing.JTable entertainmentTable;
     private javax.swing.JButton expensesButton;
     private javax.swing.JLabel expensesLabel;
     private javax.swing.JPanel expensesPanel;
+    private javax.swing.JButton filterButton;
     private javax.swing.JButton foodButton;
+    private javax.swing.JScrollPane foodScrollPane;
     private javax.swing.JTable foodTable;
     private javax.swing.JButton housingButton;
+    private javax.swing.JScrollPane housingScrollPane;
     private javax.swing.JTable housingTable;
     private javax.swing.JButton incomeButton;
     private javax.swing.JLabel incomeLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton menuButton;
@@ -405,6 +495,7 @@ public class BudgetGUI extends javax.swing.JFrame {
     private javax.swing.JPanel sidebarPanel;
     private javax.swing.JTabbedPane tabbedPane;
     private javax.swing.JButton travelButton;
+    private javax.swing.JScrollPane travelScrollPane;
     private javax.swing.JTable travelTable;
     // End of variables declaration//GEN-END:variables
 }
