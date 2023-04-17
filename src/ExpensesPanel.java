@@ -1,20 +1,13 @@
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
-import com.toedter.calendar.JCalendar;
-
-import java.awt.Component;
 import java.awt.Cursor;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -32,8 +25,8 @@ public class ExpensesPanel extends javax.swing.JPanel {
         entertainmentTable.setVisible(false);
         foodScrollPane.setVisible(false);
         foodTable.setVisible(false);
-        travelScrollPane.setVisible(false);
-        travelTable.setVisible(false);
+        transportationScrollPane.setVisible(false);
+        transportationTable.setVisible(false);
         housingScrollPane.setVisible(false);
         housingTable.setVisible(false);
         housingScrollPane.setVisible(false);
@@ -49,8 +42,8 @@ public class ExpensesPanel extends javax.swing.JPanel {
             return foodTable;
         } else if (entertainmentTable.isVisible()) {
             return entertainmentTable;
-        } else if (travelTable.isVisible()) {
-            return travelTable;
+        } else if (transportationTable.isVisible()) {
+            return transportationTable;
         } else if (otherTable.isVisible()) {
             return otherTable;
         } else {
@@ -66,25 +59,11 @@ public class ExpensesPanel extends javax.swing.JPanel {
     }
 
     private void loadData() {
-        loadTableData(entertainmentTable, "entertainmentTable.txt");
-        loadTableData(foodTable, "foodTable.txt");
-        loadTableData(housingTable, "housingTable.txt");
-        loadTableData(travelTable, "travelTable.txt");
-        loadTableData(otherTable, "otherTable.txt");
-    }
-
-    private void loadTableData(JTable table, String filename) {
-        try (Scanner scanner = new Scanner(new File("expense_tables/" + filename))) {
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            model.setRowCount(0);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] data = line.split("\t");
-                model.addRow(data);
-            }
-        } catch (FileNotFoundException e) {
-            // handle file not found exception
-        }
+        Expense.loadTableData(entertainmentTable, "entertainmentTable.txt", Expense.entertainmentData);
+        Expense.loadTableData(foodTable, "foodTable.txt", Expense.foodData);
+        Expense.loadTableData(housingTable, "housingTable.txt", Expense.housingData);
+        Expense.loadTableData(transportationTable, "travelTable.txt", Expense.transportationData);
+        Expense.loadTableData(otherTable, "otherTable.txt", Expense.otherData);
     }
 
     /**
@@ -100,7 +79,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         expensesLabel = new javax.swing.JLabel();
         selectDateLabel = new javax.swing.JLabel();
         foodButton = new javax.swing.JButton();
-        travelButton = new javax.swing.JButton();
+        transportationButton = new javax.swing.JButton();
         housingButton = new javax.swing.JButton();
         entertainmentButton = new javax.swing.JButton();
         otherButton = new javax.swing.JButton();
@@ -111,53 +90,60 @@ public class ExpensesPanel extends javax.swing.JPanel {
         entertainmentTable = new javax.swing.JTable();
         foodScrollPane = new javax.swing.JScrollPane();
         foodTable = new javax.swing.JTable();
-        travelScrollPane = new javax.swing.JScrollPane();
-        travelTable = new javax.swing.JTable();
+        transportationScrollPane = new javax.swing.JScrollPane();
+        transportationTable = new javax.swing.JTable();
         housingScrollPane = new javax.swing.JScrollPane();
         housingTable = new javax.swing.JTable();
         otherScrollPane = new javax.swing.JScrollPane();
         otherTable = new javax.swing.JTable();
         deleteButton = new javax.swing.JButton();
-        loadDateButton = new javax.swing.JButton();
+        loadButton = new javax.swing.JButton();
         addDataButton = new javax.swing.JButton();
-        saveDateButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+
+        setAutoscrolls(true);
 
         expensesPanel.setBackground(new java.awt.Color(255, 255, 255));
+        expensesPanel.setAutoscrolls(true);
         expensesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         expensesLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         expensesLabel.setText("Expenses");
+        expensesLabel.setAutoscrolls(true);
         expensesPanel.add(expensesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, 40));
 
         selectDateLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         selectDateLabel.setText("Select date:");
+        selectDateLabel.setAutoscrolls(true);
         expensesPanel.add(selectDateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 100, 30));
 
         foodButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         foodButton.setBackground(new java.awt.Color(255, 204, 204));
         foodButton.setText("Food");
+        foodButton.setAutoscrolls(true);
         foodButton.setBorderPainted(false);
         foodButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 foodButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(foodButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, -1, -1));
+        expensesPanel.add(foodButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, -1, -1));
 
-        travelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        travelButton.setBackground(new java.awt.Color(255, 255, 153));
-        travelButton.setText("Travel");
-        travelButton.setBorderPainted(false);
-        travelButton.addActionListener(new java.awt.event.ActionListener() {
+        transportationButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        transportationButton.setBackground(new java.awt.Color(255, 255, 153));
+        transportationButton.setText("Transportation");
+        transportationButton.setBorderPainted(false);
+        transportationButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                travelButtonActionPerformed(evt);
+                transportationButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(travelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, -1, -1));
+        expensesPanel.add(transportationButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, -1, -1));
 
         housingButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         housingButton.setBackground(new java.awt.Color(205, 204, 255));
         housingButton.setText("Housing");
+        housingButton.setAutoscrolls(true);
         housingButton.setBorderPainted(false);
         housingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,17 +155,19 @@ public class ExpensesPanel extends javax.swing.JPanel {
         entertainmentButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         entertainmentButton.setBackground(new java.awt.Color(204, 255, 255));
         entertainmentButton.setText("Entertainment");
+        entertainmentButton.setAutoscrolls(true);
         entertainmentButton.setBorderPainted(false);
         entertainmentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 entertainmentButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(entertainmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, -1));
+        expensesPanel.add(entertainmentButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, -1));
 
         otherButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         otherButton.setBackground(new java.awt.Color(235, 255, 204));
         otherButton.setText("Other");
+        otherButton.setAutoscrolls(true);
         otherButton.setBorderPainted(false);
         otherButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +175,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
             }
         });
         otherButton.setVisible(true);
-        expensesPanel.add(otherButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
+        expensesPanel.add(otherButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         saveTableButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         saveTableButton.setBackground(new java.awt.Color(51, 255, 255));
@@ -204,18 +192,22 @@ public class ExpensesPanel extends javax.swing.JPanel {
         clearAllTablesButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         clearAllTablesButton.setForeground(new java.awt.Color(255, 255, 255));
         clearAllTablesButton.setText("CLEAR ALL TABLES");
+        clearAllTablesButton.setAutoscrolls(true);
         clearAllTablesButton.setBorderPainted(false);
         clearAllTablesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clearAllTablesButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(clearAllTablesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 350, 240, -1));
+        expensesPanel.add(clearAllTablesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 310, 240, -1));
 
         calendar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         calendar.setToolTipText("Select a date");
-        calendar.setDecorationBackgroundColor(new java.awt.Color(105, 255, 222));
+        calendar.setAutoscrolls(true);
+        calendar.setDecorationBackgroundColor(new java.awt.Color(51, 255, 255));
         expensesPanel.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 240, 150));
+
+        entertainmentScrollPane.setAutoscrolls(true);
 
         entertainmentTable.setAutoCreateRowSorter(true);
         entertainmentTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -244,6 +236,8 @@ public class ExpensesPanel extends javax.swing.JPanel {
 
         expensesPanel.add(entertainmentScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
 
+        foodScrollPane.setAutoscrolls(true);
+
         foodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Breakfast", "0", "0", "0"},
@@ -263,7 +257,9 @@ public class ExpensesPanel extends javax.swing.JPanel {
 
         expensesPanel.add(foodScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
 
-        travelTable.setModel(new javax.swing.table.DefaultTableModel(
+        transportationScrollPane.setAutoscrolls(true);
+
+        transportationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Flight", "0", "0", "0"},
                 {"Fuel", "0", "0", "0"},
@@ -275,13 +271,15 @@ public class ExpensesPanel extends javax.swing.JPanel {
                 "Expense", "Budget", "Actual Spent", "Difference"
             }
         ));
-        travelTable.setGridColor(new java.awt.Color(112, 0, 73));
-        travelTable.setName("travelTable");
-        travelTable.setShowGrid(true);
-        CurrencyRenderer.formatCurrencyColumns(travelTable, 1, 2, 3);
-        travelScrollPane.setViewportView(travelTable);
+        transportationTable.setGridColor(new java.awt.Color(112, 0, 73));
+        transportationTable.setName("transportationTable");
+        transportationTable.setShowGrid(true);
+        CurrencyRenderer.formatCurrencyColumns(transportationTable, 1, 2, 3);
+        transportationScrollPane.setViewportView(transportationTable);
 
-        expensesPanel.add(travelScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
+        expensesPanel.add(transportationScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
+
+        housingScrollPane.setAutoscrolls(true);
 
         housingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -305,6 +303,8 @@ public class ExpensesPanel extends javax.swing.JPanel {
         housingScrollPane.setViewportView(housingTable);
 
         expensesPanel.add(housingScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 600, 450));
+
+        otherScrollPane.setAutoscrolls(true);
 
         otherTable.setAutoCreateRowSorter(true);
         otherTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -336,6 +336,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         deleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         deleteButton.setBackground(new java.awt.Color(255, 0, 102));
         deleteButton.setText("DELETE EXPENSE");
+        deleteButton.setAutoscrolls(true);
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteButtonActionPerformed(evt);
@@ -343,17 +344,19 @@ public class ExpensesPanel extends javax.swing.JPanel {
         });
         expensesPanel.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, -1, -1));
 
-        loadDateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        loadDateButton.setBackground(new java.awt.Color(57, 255, 50));
-        loadDateButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loadDateButton.setText("LOAD DATE");
-        loadDateButton.setBorderPainted(false);
-        loadDateButton.addActionListener(new java.awt.event.ActionListener() {
+        loadButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        loadButton.setBackground(new java.awt.Color(57, 255, 50));
+        loadButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loadButton.setText("LOAD");
+        loadButton.setToolTipText("Load all tables for the selected date");
+        loadButton.setAutoscrolls(true);
+        loadButton.setBorderPainted(false);
+        loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadDateButtonActionPerformed(evt);
+                loadButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(loadDateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 240, -1));
+        expensesPanel.add(loadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, 110, -1));
 
         addDataButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         addDataButton.setBackground(new java.awt.Color(57, 255, 50));
@@ -365,17 +368,19 @@ public class ExpensesPanel extends javax.swing.JPanel {
         });
         expensesPanel.add(addDataButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
 
-        saveDateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        saveDateButton.setBackground(new java.awt.Color(51, 255, 255));
-        saveDateButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        saveDateButton.setText("SAVE DATE");
-        saveDateButton.setBorderPainted(false);
-        saveDateButton.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        saveButton.setBackground(new java.awt.Color(51, 255, 255));
+        saveButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saveButton.setText("SAVE");
+        saveButton.setToolTipText("Save all tables for the selected date");
+        saveButton.setAutoscrolls(true);
+        saveButton.setBorderPainted(false);
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveDateButtonActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(saveDateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 310, 240, -1));
+        expensesPanel.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 120, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -405,11 +410,11 @@ public class ExpensesPanel extends javax.swing.JPanel {
         foodTable.setVisible(true);
     }//GEN-LAST:event_foodButtonActionPerformed
 
-    private void travelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_travelButtonActionPerformed
+    private void transportationButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transportationButtonActionPerformed
         hideTables();
-        travelScrollPane.setVisible(true);
-        travelTable.setVisible(true);
-    }//GEN-LAST:event_travelButtonActionPerformed
+        transportationScrollPane.setVisible(true);
+        transportationTable.setVisible(true);
+    }//GEN-LAST:event_transportationButtonActionPerformed
 
     private void housingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_housingButtonActionPerformed
         hideTables();
@@ -445,8 +450,8 @@ public class ExpensesPanel extends javax.swing.JPanel {
                 case "entertainmentTable":
                     dataList = Expense.entertainmentData;
                     break;
-                case "travelTable":
-                    dataList = Expense.travelData;
+                case "transportationTable":
+                    dataList = Expense.transportationData;
                     break;
                 case "otherTable":
                     dataList = Expense.otherData;
@@ -463,9 +468,8 @@ public class ExpensesPanel extends javax.swing.JPanel {
                         dataList.add(row);
                     }
                     try {
-                        Expense expense = new Expense("", 0, 0, 0);
                         String filename = table.getName() + ".txt";
-                        expense.exportTable(dataList, filename);
+                        Expense.exportTable(dataList, filename);
                         JOptionPane.showMessageDialog(this, "Table has been saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -478,12 +482,71 @@ public class ExpensesPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_saveTableButtonActionPerformed
 
     private void clearAllTablesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearAllTablesButtonActionPerformed
-        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all table data?", "Confirm Clear", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            DefaultTableModel foodModel = (DefaultTableModel) foodTable.getModel();
+            Expense.clearTableData(foodModel);
+
+            DefaultTableModel entertainmentModel = (DefaultTableModel) entertainmentTable.getModel();
+            Expense.clearTableData(entertainmentModel);
+
+            DefaultTableModel transportationModel = (DefaultTableModel) transportationTable.getModel();
+            Expense.clearTableData(transportationModel);
+
+            DefaultTableModel housingModel = (DefaultTableModel) housingTable.getModel();
+            Expense.clearTableData(housingModel);
+
+            DefaultTableModel otherModel = (DefaultTableModel) otherTable.getModel();
+            Expense.clearTableData(otherModel);
+        }
     }//GEN-LAST:event_clearAllTablesButtonActionPerformed
 
-    private void loadDateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDateButtonActionPerformed
+    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+        // Get the selected date from the calendar
+        Date selectedDate = calendar.getDate();
+        if (selectedDate == null) {
+            // Notify the user that no date has been selected
+            JOptionPane.showMessageDialog(null, "Please select a date.");
+            return;
+        }
+        // Import the tables using the selected date
+        try {
+            DefaultTableModel entertainmentModel = (DefaultTableModel) entertainmentTable.getModel();
+            DefaultTableModel foodModel = (DefaultTableModel) foodTable.getModel();
+            DefaultTableModel travelModel = (DefaultTableModel) transportationTable.getModel();
+            DefaultTableModel housingModel = (DefaultTableModel) housingTable.getModel();
+            DefaultTableModel otherModel = (DefaultTableModel) otherTable.getModel();
 
-    }//GEN-LAST:event_loadDateButtonActionPerformed
+            // Clear out any existing rows in the models
+            entertainmentModel.setRowCount(0);
+            foodModel.setRowCount(0);
+            travelModel.setRowCount(0);
+            housingModel.setRowCount(0);
+            otherModel.setRowCount(0);
+
+            Expense.importTable(Expense.entertainmentData, "entertainment.txt", selectedDate);
+            Expense.importTable(Expense.foodData, "food.txt", selectedDate);
+            Expense.importTable(Expense.transportationData, "transportation.txt", selectedDate);
+            Expense.importTable(Expense.housingData, "housing.txt", selectedDate);
+            Expense.importTable(Expense.otherData, "other.txt", selectedDate);
+
+            // Notify the user that the tables have been imported
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
+            String dateString = dateFormat.format(selectedDate);
+            
+            entertainmentTable.setModel(entertainmentModel);
+            foodTable.setModel(foodModel);
+            transportationTable.setModel(travelModel);
+            housingTable.setModel(housingModel);
+            otherTable.setModel(otherModel);
+
+            JOptionPane.showMessageDialog(null, "Tables imported successfully for " + dateString);
+        } catch (IOException ex) {
+            // Notify the user of any errors during the import process
+            JOptionPane.showMessageDialog(null, "Error importing tables: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_loadButtonActionPerformed
 
     private void addDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataButtonActionPerformed
         // Get the currently visible table
@@ -518,7 +581,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void saveDateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDateButtonActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // Get the selected date from the calendar
         Date selectedDate = calendar.getDate();
         if (selectedDate == null) {
@@ -530,16 +593,19 @@ public class ExpensesPanel extends javax.swing.JPanel {
         try {
             Expense.exportTable(Expense.entertainmentData, "entertainment.txt", selectedDate);
             Expense.exportTable(Expense.foodData, "food.txt", selectedDate);
-            Expense.exportTable(Expense.travelData, "travel.txt", selectedDate);
+            Expense.exportTable(Expense.transportationData, "travel.txt", selectedDate);
             Expense.exportTable(Expense.housingData, "housing.txt", selectedDate);
             Expense.exportTable(Expense.otherData, "other.txt", selectedDate);
+            // Format the date string in MMMM, dd, yyyy format
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
+            String dateString = dateFormat.format(selectedDate);
             // Notify the user that the tables have been exported
-            JOptionPane.showMessageDialog(null, "Tables exported successfully to " + selectedDate.toString());
+            JOptionPane.showMessageDialog(null, "Tables exported successfully for " + dateString);
         } catch (IOException ex) {
             // Notify the user of any errors during the export process
             JOptionPane.showMessageDialog(null, "Error exporting tables: " + ex.getMessage());
         }
-    }//GEN-LAST:event_saveDateButtonActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataButton;
@@ -557,16 +623,16 @@ public class ExpensesPanel extends javax.swing.JPanel {
     private javax.swing.JButton housingButton;
     private javax.swing.JScrollPane housingScrollPane;
     private javax.swing.JTable housingTable;
-    private javax.swing.JButton loadDateButton;
+    private javax.swing.JButton loadButton;
     private javax.swing.JButton otherButton;
     private javax.swing.JScrollPane otherScrollPane;
     private javax.swing.JTable otherTable;
-    private javax.swing.JButton saveDateButton;
+    private javax.swing.JButton saveButton;
     private javax.swing.JButton saveTableButton;
     private javax.swing.JLabel selectDateLabel;
-    private javax.swing.JButton travelButton;
-    private javax.swing.JScrollPane travelScrollPane;
-    private javax.swing.JTable travelTable;
+    private javax.swing.JButton transportationButton;
+    private javax.swing.JScrollPane transportationScrollPane;
+    private javax.swing.JTable transportationTable;
     // End of variables declaration//GEN-END:variables
 
     

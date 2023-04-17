@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="autoscrolls" type="boolean" value="true"/>
+  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -45,6 +48,7 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
+        <Property name="autoscrolls" type="boolean" value="true"/>
       </Properties>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
@@ -57,6 +61,7 @@
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Expenses"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -70,6 +75,7 @@
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Select date:"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -83,6 +89,7 @@
               <Color blue="cc" green="cc" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Food"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -93,27 +100,27 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="630" y="10" width="-1" height="-1"/>
+              <AbsoluteConstraints x="590" y="10" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="travelButton">
+        <Component class="javax.swing.JButton" name="transportationButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Travel"/>
+            <Property name="text" type="java.lang.String" value="Transportation"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="travelButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="transportationButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="travelButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="transportationButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="720" y="10" width="-1" height="-1"/>
+              <AbsoluteConstraints x="680" y="10" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -123,6 +130,7 @@
               <Color blue="ff" green="cc" red="cd" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Housing"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -143,6 +151,7 @@
               <Color blue="ff" green="ff" red="cc" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Entertainment"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -153,7 +162,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="500" y="10" width="-1" height="-1"/>
+              <AbsoluteConstraints x="460" y="10" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -163,6 +172,7 @@
               <Color blue="cc" green="ff" red="eb" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Other"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -174,7 +184,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="410" y="10" width="-1" height="-1"/>
+              <AbsoluteConstraints x="370" y="10" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -209,6 +219,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CLEAR ALL TABLES"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -219,15 +230,16 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="640" y="350" width="240" height="-1"/>
+              <AbsoluteConstraints x="640" y="310" width="240" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Component class="com.toedter.calendar.JCalendar" name="calendar">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="Select a date"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="decorationBackgroundColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="de" green="ff" red="69" type="rgb"/>
+              <Color blue="ff" green="ff" red="33" type="rgb"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -240,6 +252,9 @@
           </Constraints>
         </Component>
         <Container class="javax.swing.JScrollPane" name="entertainmentScrollPane">
+          <Properties>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -332,6 +347,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="foodScrollPane">
+          <Properties>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -408,7 +426,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="travelScrollPane">
+        <Container class="javax.swing.JScrollPane" name="transportationScrollPane">
+          <Properties>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -420,7 +441,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="travelTable">
+            <Component class="javax.swing.JTable" name="transportationTable">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="5">
@@ -478,10 +499,10 @@
                     </Column>
                   </TableColumnModel>
                 </Property>
-                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="travelTable.setName(&quot;travelTable&quot;);">
+                <Property name="gridColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor" postCode="transportationTable.setName(&quot;transportationTable&quot;);">
                   <Color blue="49" green="0" red="70" type="rgb"/>
                 </Property>
-                <Property name="showGrid" type="boolean" value="true" postCode="CurrencyRenderer.formatCurrencyColumns(travelTable, 1, 2, 3);"/>
+                <Property name="showGrid" type="boolean" value="true" postCode="CurrencyRenderer.formatCurrencyColumns(transportationTable, 1, 2, 3);"/>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
@@ -490,6 +511,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="housingScrollPane">
+          <Properties>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -583,6 +607,9 @@
           </SubComponents>
         </Container>
         <Container class="javax.swing.JScrollPane" name="otherScrollPane">
+          <Properties>
+            <Property name="autoscrolls" type="boolean" value="true"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -680,6 +707,7 @@
               <Color blue="66" green="0" red="ff" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="DELETE EXPENSE"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
@@ -693,7 +721,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="loadDateButton">
+        <Component class="javax.swing.JButton" name="loadButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="32" green="ff" red="39" type="rgb"/>
@@ -701,18 +729,20 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="LOAD DATE"/>
+            <Property name="text" type="java.lang.String" value="LOAD"/>
+            <Property name="toolTipText" type="java.lang.String" value="Load all tables for the selected date"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadDateButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loadButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="loadDateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="loadButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="640" y="270" width="240" height="-1"/>
+              <AbsoluteConstraints x="770" y="270" width="110" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -735,7 +765,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="saveDateButton">
+        <Component class="javax.swing.JButton" name="saveButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="33" type="rgb"/>
@@ -743,18 +773,20 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="SAVE DATE"/>
+            <Property name="text" type="java.lang.String" value="SAVE"/>
+            <Property name="toolTipText" type="java.lang.String" value="Save all tables for the selected date"/>
+            <Property name="autoscrolls" type="boolean" value="true"/>
             <Property name="borderPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveDateButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveButtonActionPerformed"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="saveDateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="saveButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));"/>
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="640" y="310" width="240" height="-1"/>
+              <AbsoluteConstraints x="640" y="270" width="120" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
