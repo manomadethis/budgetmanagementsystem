@@ -1,0 +1,6 @@
+Expense 1	0	0	0	
+Expense 2	0	0	0	
+Expense 3	0	0	0	
+Expense 4	0	0	0	
+Expense 5	0	0	0	
+New Expense	250	0	0	
