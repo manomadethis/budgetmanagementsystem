@@ -1,7 +1,12 @@
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import com.toedter.calendar.JCalendar;
 
 /**
  *
@@ -44,7 +49,7 @@ public class Expense {
     }
 
     void exportTable(ArrayList<List<String>> dataList, String filename) throws IOException {
-        FileWriter writer = new FileWriter(filename);
+        FileWriter writer = new FileWriter("expense_tables/" + filename);
         for (List<String> row : dataList) {
             for (String value : row) {
                 writer.write(value + "\t");
@@ -53,5 +58,22 @@ public class Expense {
         }
         writer.close();
     }
+    
+    public static void exportTable(ArrayList<List<String>> dataList, String filename, Date selectedDate) throws IOException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        String folderName = dateFormat.format(selectedDate);
+        File folder = new File("expense_tables/" + folderName);
+        folder.mkdirs();
+            
+        FileWriter writer = new FileWriter("expense_tables/" + folderName + "/" + filename);
+        for (List<String> row : dataList) {
+            for (String value : row) {
+                writer.write(value + "\t");
+            }
+            writer.write("\n");
+        }
+        writer.close();
+    }
+    
     
 }

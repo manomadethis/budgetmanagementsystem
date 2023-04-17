@@ -3,12 +3,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JCalendar;
+
 import java.awt.Component;
 import java.awt.Cursor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -70,8 +74,9 @@ public class ExpensesPanel extends javax.swing.JPanel {
     }
 
     private void loadTableData(JTable table, String filename) {
-        try (Scanner scanner = new Scanner(new File(filename))) {
+        try (Scanner scanner = new Scanner(new File("expense_tables/" + filename))) {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
+            model.setRowCount(0);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] data = line.split("\t");
@@ -81,6 +86,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
             // handle file not found exception
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,7 +105,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         entertainmentButton = new javax.swing.JButton();
         otherButton = new javax.swing.JButton();
         saveTableButton = new javax.swing.JButton();
-        clearAllDataButton = new javax.swing.JButton();
+        clearAllTablesButton = new javax.swing.JButton();
         calendar = new com.toedter.calendar.JCalendar();
         entertainmentScrollPane = new javax.swing.JScrollPane();
         entertainmentTable = new javax.swing.JTable();
@@ -112,9 +118,9 @@ public class ExpensesPanel extends javax.swing.JPanel {
         otherScrollPane = new javax.swing.JScrollPane();
         otherTable = new javax.swing.JTable();
         deleteButton = new javax.swing.JButton();
-        renameButton = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
+        loadDateButton = new javax.swing.JButton();
         addDataButton = new javax.swing.JButton();
+        saveDateButton = new javax.swing.JButton();
 
         expensesPanel.setBackground(new java.awt.Color(255, 255, 255));
         expensesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -191,20 +197,20 @@ public class ExpensesPanel extends javax.swing.JPanel {
                 saveTableButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(saveTableButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, -1, -1));
+        expensesPanel.add(saveTableButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, -1, -1));
 
-        clearAllDataButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        clearAllDataButton.setBackground(new java.awt.Color(255, 0, 0));
-        clearAllDataButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        clearAllDataButton.setForeground(new java.awt.Color(255, 255, 255));
-        clearAllDataButton.setText("CLEAR ALL DATA");
-        clearAllDataButton.setBorderPainted(false);
-        clearAllDataButton.addActionListener(new java.awt.event.ActionListener() {
+        clearAllTablesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        clearAllTablesButton.setBackground(new java.awt.Color(255, 0, 0));
+        clearAllTablesButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        clearAllTablesButton.setForeground(new java.awt.Color(255, 255, 255));
+        clearAllTablesButton.setText("CLEAR ALL TABLES");
+        clearAllTablesButton.setBorderPainted(false);
+        clearAllTablesButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clearAllDataButtonActionPerformed(evt);
+                clearAllTablesButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(clearAllDataButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 310, 240, -1));
+        expensesPanel.add(clearAllTablesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 350, 240, -1));
 
         calendar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         calendar.setToolTipText("Select a date");
@@ -225,7 +231,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
             }
         ));
         entertainmentTable.setToolTipText("Double-click to edit data");
-        entertainmentTable.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        entertainmentTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         entertainmentTable.setGridColor(new java.awt.Color(112, 0, 73));
         entertainmentTable.setInheritsPopupMenu(true);
         entertainmentTable.setName("entertainmentTable");
@@ -314,7 +320,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
             }
         ));
         otherTable.setToolTipText("Double-click to edit data");
-        otherTable.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        otherTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         otherTable.setGridColor(new java.awt.Color(112, 0, 73));
         otherTable.setInheritsPopupMenu(true);
         otherTable.setName("otherTable");
@@ -330,24 +336,24 @@ public class ExpensesPanel extends javax.swing.JPanel {
         deleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         deleteButton.setBackground(new java.awt.Color(255, 0, 102));
         deleteButton.setText("DELETE EXPENSE");
-        expensesPanel.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, -1, -1));
-
-        renameButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        renameButton.setBackground(new java.awt.Color(255, 255, 0));
-        renameButton.setText("RENAME EXPENSE");
-        expensesPanel.add(renameButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, -1, -1));
-
-        saveButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        saveButton.setBackground(new java.awt.Color(105, 255, 222));
-        saveButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        saveButton.setText("SAVE DATE");
-        saveButton.setBorderPainted(false);
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 240, -1));
+        expensesPanel.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, -1, -1));
+
+        loadDateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        loadDateButton.setBackground(new java.awt.Color(57, 255, 50));
+        loadDateButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loadDateButton.setText("LOAD DATE");
+        loadDateButton.setBorderPainted(false);
+        loadDateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadDateButtonActionPerformed(evt);
+            }
+        });
+        expensesPanel.add(loadDateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 240, -1));
 
         addDataButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         addDataButton.setBackground(new java.awt.Color(57, 255, 50));
@@ -358,6 +364,18 @@ public class ExpensesPanel extends javax.swing.JPanel {
             }
         });
         expensesPanel.add(addDataButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
+
+        saveDateButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        saveDateButton.setBackground(new java.awt.Color(51, 255, 255));
+        saveDateButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saveDateButton.setText("SAVE DATE");
+        saveDateButton.setBorderPainted(false);
+        saveDateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveDateButtonActionPerformed(evt);
+            }
+        });
+        expensesPanel.add(saveDateButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 310, 240, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -459,13 +477,13 @@ public class ExpensesPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_saveTableButtonActionPerformed
 
-    private void clearAllDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearAllDataButtonActionPerformed
+    private void clearAllTablesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearAllTablesButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_clearAllDataButtonActionPerformed
+    }//GEN-LAST:event_clearAllTablesButtonActionPerformed
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+    private void loadDateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDateButtonActionPerformed
 
-    }//GEN-LAST:event_saveButtonActionPerformed
+    }//GEN-LAST:event_loadDateButtonActionPerformed
 
     private void addDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataButtonActionPerformed
         // Get the currently visible table
@@ -477,11 +495,56 @@ public class ExpensesPanel extends javax.swing.JPanel {
         // Add the new row to the table model
         model.addRow(newRowData);
     }//GEN-LAST:event_addDataButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // Get the currently visible table
+        JTable visibleTable = visibleTable();
+        // Get the indices of the selected rows
+        int[] selectedRows = visibleTable.getSelectedRows();
+        // Get the table model of the visible table
+        DefaultTableModel model = (DefaultTableModel) visibleTable.getModel();
+        // If no rows are selected, display a message to the user
+        if (selectedRows.length == 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.");
+        } else {
+            // Ask the user to confirm that they want to delete the selected row(s)
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete the selected row(s)?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Loop through the selected rows and remove them from the table model
+                for (int i = selectedRows.length - 1; i >= 0; i--) {
+                    model.removeRow(selectedRows[i]);
+                }
+            }
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void saveDateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveDateButtonActionPerformed
+        // Get the selected date from the calendar
+        Date selectedDate = calendar.getDate();
+        if (selectedDate == null) {
+            // Notify the user that no date has been selected
+            JOptionPane.showMessageDialog(null, "Please select a date.");
+            return;
+        }
+        // Export the tables using the selected date
+        try {
+            Expense.exportTable(Expense.entertainmentData, "entertainment.txt", selectedDate);
+            Expense.exportTable(Expense.foodData, "food.txt", selectedDate);
+            Expense.exportTable(Expense.travelData, "travel.txt", selectedDate);
+            Expense.exportTable(Expense.housingData, "housing.txt", selectedDate);
+            Expense.exportTable(Expense.otherData, "other.txt", selectedDate);
+            // Notify the user that the tables have been exported
+            JOptionPane.showMessageDialog(null, "Tables exported successfully to " + selectedDate.toString());
+        } catch (IOException ex) {
+            // Notify the user of any errors during the export process
+            JOptionPane.showMessageDialog(null, "Error exporting tables: " + ex.getMessage());
+        }
+    }//GEN-LAST:event_saveDateButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataButton;
     private com.toedter.calendar.JCalendar calendar;
-    private javax.swing.JButton clearAllDataButton;
+    private javax.swing.JButton clearAllTablesButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton entertainmentButton;
     private javax.swing.JScrollPane entertainmentScrollPane;
@@ -494,11 +557,11 @@ public class ExpensesPanel extends javax.swing.JPanel {
     private javax.swing.JButton housingButton;
     private javax.swing.JScrollPane housingScrollPane;
     private javax.swing.JTable housingTable;
+    private javax.swing.JButton loadDateButton;
     private javax.swing.JButton otherButton;
     private javax.swing.JScrollPane otherScrollPane;
     private javax.swing.JTable otherTable;
-    private javax.swing.JButton renameButton;
-    private javax.swing.JButton saveButton;
+    private javax.swing.JButton saveDateButton;
     private javax.swing.JButton saveTableButton;
     private javax.swing.JLabel selectDateLabel;
     private javax.swing.JButton travelButton;

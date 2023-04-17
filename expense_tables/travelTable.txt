@@ -1,4 +1,4 @@
-Flight	052	0	0	
+Flights	52	0	0	
 Fuel	0	0	0	
 Taxi fare	0	0	0	
 Bus fare	0	0	0	
