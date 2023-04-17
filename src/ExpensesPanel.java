@@ -62,7 +62,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         Expense.loadTableData(entertainmentTable, "entertainmentTable.txt", Expense.entertainmentData);
         Expense.loadTableData(foodTable, "foodTable.txt", Expense.foodData);
         Expense.loadTableData(housingTable, "housingTable.txt", Expense.housingData);
-        Expense.loadTableData(transportationTable, "travelTable.txt", Expense.transportationData);
+        Expense.loadTableData(transportationTable, "transportationTable.txt", Expense.transportationData);
         Expense.loadTableData(otherTable, "otherTable.txt", Expense.otherData);
     }
 
@@ -249,6 +249,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
                 "Expense", "Budget", "Actual Spent", "Difference"
             }
         ));
+        foodTable.setToolTipText("Double-click to edit data");
         foodTable.setGridColor(new java.awt.Color(112, 0, 73));
         foodTable.setName("foodTable");
         foodTable.setShowGrid(true);
@@ -271,6 +272,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
                 "Expense", "Budget", "Actual Spent", "Difference"
             }
         ));
+        transportationTable.setToolTipText("Double-click to edit data");
         transportationTable.setGridColor(new java.awt.Color(112, 0, 73));
         transportationTable.setName("transportationTable");
         transportationTable.setShowGrid(true);
@@ -296,6 +298,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
                 "Expense", "Budget", "Actual Spent", "Difference"
             }
         ));
+        housingTable.setToolTipText("Double-click to edit data");
         housingTable.setGridColor(new java.awt.Color(112, 0, 73));
         housingTable.setName("housingTable");
         housingTable.setShowGrid(true);
@@ -514,22 +517,22 @@ public class ExpensesPanel extends javax.swing.JPanel {
         try {
             DefaultTableModel entertainmentModel = (DefaultTableModel) entertainmentTable.getModel();
             DefaultTableModel foodModel = (DefaultTableModel) foodTable.getModel();
-            DefaultTableModel travelModel = (DefaultTableModel) transportationTable.getModel();
+            DefaultTableModel transportationModel = (DefaultTableModel) transportationTable.getModel();
             DefaultTableModel housingModel = (DefaultTableModel) housingTable.getModel();
             DefaultTableModel otherModel = (DefaultTableModel) otherTable.getModel();
 
             // Clear out any existing rows in the models
             entertainmentModel.setRowCount(0);
             foodModel.setRowCount(0);
-            travelModel.setRowCount(0);
+            transportationModel.setRowCount(0);
             housingModel.setRowCount(0);
             otherModel.setRowCount(0);
 
-            Expense.importTable(Expense.entertainmentData, "entertainment.txt", selectedDate);
-            Expense.importTable(Expense.foodData, "food.txt", selectedDate);
-            Expense.importTable(Expense.transportationData, "transportation.txt", selectedDate);
-            Expense.importTable(Expense.housingData, "housing.txt", selectedDate);
-            Expense.importTable(Expense.otherData, "other.txt", selectedDate);
+            Expense.importTable(entertainmentModel, "entertainment.txt", selectedDate);
+            Expense.importTable(foodModel, "food.txt", selectedDate);
+            Expense.importTable(transportationModel, "transportation.txt", selectedDate);
+            Expense.importTable(housingModel, "housing.txt", selectedDate);
+            Expense.importTable(otherModel, "other.txt", selectedDate);
 
             // Notify the user that the tables have been imported
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
@@ -537,7 +540,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
             
             entertainmentTable.setModel(entertainmentModel);
             foodTable.setModel(foodModel);
-            transportationTable.setModel(travelModel);
+            transportationTable.setModel(transportationModel);
             housingTable.setModel(housingModel);
             otherTable.setModel(otherModel);
 
@@ -593,7 +596,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         try {
             Expense.exportTable(Expense.entertainmentData, "entertainment.txt", selectedDate);
             Expense.exportTable(Expense.foodData, "food.txt", selectedDate);
-            Expense.exportTable(Expense.transportationData, "travel.txt", selectedDate);
+            Expense.exportTable(Expense.transportationData, "transportation.txt", selectedDate);
             Expense.exportTable(Expense.housingData, "housing.txt", selectedDate);
             Expense.exportTable(Expense.otherData, "other.txt", selectedDate);
             // Format the date string in MMMM, dd, yyyy format

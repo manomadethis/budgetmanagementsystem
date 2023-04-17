@@ -81,7 +81,7 @@ public class Expense {
         writer.close();
     }
 
-    public static void importTable(ArrayList<List<String>> dataList, String filename, Date selectedDate) throws IOException {
+    public static void importTable(DefaultTableModel model, String filename, Date selectedDate) throws IOException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         String folderName = dateFormat.format(selectedDate);
         File file = new File("expense_tables/" + folderName + "/" + filename);
@@ -92,10 +92,11 @@ public class Expense {
         String line;
         while ((line = reader.readLine()) != null) {
             String[] values = line.split("\t");
-            dataList.add(Arrays.asList(values));
+            model.addRow(values);
         }
         reader.close();
     }
+    
     
     
     public static void loadTableData(JTable table, String filename, ArrayList<List<String>> dataList) {
