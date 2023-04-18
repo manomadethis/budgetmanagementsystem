@@ -19,7 +19,7 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         setVisible(true);
-        contentPanel.add(incomePanel);
+        contentPanel.add(dashboardPanel);  
     }
 
         
@@ -38,6 +38,7 @@ public class MainGUI extends javax.swing.JFrame {
         incomeButton = new javax.swing.JButton();
         expensesButton = new javax.swing.JButton();
         reportButton = new javax.swing.JButton();
+        dashboardButton = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,7 +70,7 @@ public class MainGUI extends javax.swing.JFrame {
                 incomeButtonActionPerformed(evt);
             }
         });
-        sidebarPanel.add(incomeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 60, 40));
+        sidebarPanel.add(incomeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 60, 40));
 
         expensesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         expensesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/manage_budget_36.png"))); // NOI18N
@@ -80,7 +81,7 @@ public class MainGUI extends javax.swing.JFrame {
                 expensesButtonActionPerformed(evt);
             }
         });
-        sidebarPanel.add(expensesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 60, 40));
+        sidebarPanel.add(expensesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 60, 40));
 
         reportButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         reportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/report.png"))); // NOI18N
@@ -91,7 +92,18 @@ public class MainGUI extends javax.swing.JFrame {
                 reportButtonActionPerformed(evt);
             }
         });
-        sidebarPanel.add(reportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 60, 40));
+        sidebarPanel.add(reportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 60, 40));
+
+        incomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dashboard.png"))); // NOI18N
+        dashboardButton.setBorderPainted(false);
+        dashboardButton.setContentAreaFilled(false);
+        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dashboardButtonActionPerformed(evt);
+            }
+        });
+        sidebarPanel.add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 60, 40));
 
         getContentPane().add(sidebarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -134,9 +146,14 @@ public class MainGUI extends javax.swing.JFrame {
         revalidate();
         pack();
     }//GEN-LAST:event_menuButtonActionPerformed
+
+    private void dashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dashboardButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
+    private javax.swing.JButton dashboardButton;
     private javax.swing.JButton expensesButton;
     private javax.swing.JButton incomeButton;
     private javax.swing.JSeparator jSeparator1;

@@ -23,6 +23,10 @@ public class DashboardPanel extends javax.swing.JPanel {
 
         dashboardPanel = new javax.swing.JPanel();
         dashboardLabel = new javax.swing.JLabel();
+        mmmsLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        backgroundImage = new javax.swing.JLabel();
 
         dashboardPanel.setBackground(new java.awt.Color(255, 255, 255));
         dashboardPanel.setAutoscrolls(true);
@@ -30,7 +34,25 @@ public class DashboardPanel extends javax.swing.JPanel {
 
         dashboardLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         dashboardLabel.setText("Dashboard");
-        dashboardPanel.add(dashboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 100, 50));
+        dashboardPanel.add(dashboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, 50));
+
+        mmmsLabel.setFont(new java.awt.Font("Vivaldi", 0, 36)); // NOI18N
+        mmmsLabel.setText("Money Matters Management System");
+        dashboardPanel.add(mmmsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 510, 40));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Do you have trouble managing your funds?");
+        dashboardPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, 360, -1));
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Look no further!");
+        dashboardPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 220, -1));
+
+        backgroundImage.setBackground(new java.awt.Color(255, 255, 255));
+        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard_bg.jpg"))); // NOI18N
+        dashboardPanel.add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(-440, 0, 1340, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -56,7 +78,11 @@ public class DashboardPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backgroundImage;
     private javax.swing.JLabel dashboardLabel;
     private javax.swing.JPanel dashboardPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel mmmsLabel;
     // End of variables declaration//GEN-END:variables
 }
