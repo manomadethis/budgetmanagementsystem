@@ -1,0 +1,4 @@
+Breakfast	0	0	0	
+Lunch	0	0	0	
+Dinner	0	0	0	
+Drinks	100	50	50	

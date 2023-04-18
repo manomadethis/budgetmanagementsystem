@@ -128,6 +128,7 @@ public class MainGUI extends javax.swing.JFrame {
         getContentPane().add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 900, 600));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void expensesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expensesButtonActionPerformed
