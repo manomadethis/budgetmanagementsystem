@@ -19,7 +19,7 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI() {
         initComponents();
         setVisible(true);
-        contentPanel.add(dashboardPanel);
+        contentPanel.add(incomePanel);
     }
 
         
@@ -35,12 +35,9 @@ public class MainGUI extends javax.swing.JFrame {
         sidebarPanel = new javax.swing.JPanel();
         menuButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        dashboardButton = new javax.swing.JButton();
         incomeButton = new javax.swing.JButton();
         expensesButton = new javax.swing.JButton();
         reportButton = new javax.swing.JButton();
-        settingsButton = new javax.swing.JButton();
-        logoutButton = new javax.swing.JButton();
         contentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -63,17 +60,6 @@ public class MainGUI extends javax.swing.JFrame {
         sidebarPanel.add(menuButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 60, 40));
         sidebarPanel.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 59, 12));
 
-        dashboardButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        dashboardButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/dashboard.png"))); // NOI18N
-        dashboardButton.setBorderPainted(false);
-        dashboardButton.setContentAreaFilled(false);
-        dashboardButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dashboardButtonActionPerformed(evt);
-            }
-        });
-        sidebarPanel.add(dashboardButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 60, 40));
-
         incomeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         incomeButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/transactions_36.png"))); // NOI18N
         incomeButton.setBorderPainted(false);
@@ -83,7 +69,7 @@ public class MainGUI extends javax.swing.JFrame {
                 incomeButtonActionPerformed(evt);
             }
         });
-        sidebarPanel.add(incomeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 60, 40));
+        sidebarPanel.add(incomeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 60, 40));
 
         expensesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         expensesButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/manage_budget_36.png"))); // NOI18N
@@ -94,7 +80,7 @@ public class MainGUI extends javax.swing.JFrame {
                 expensesButtonActionPerformed(evt);
             }
         });
-        sidebarPanel.add(expensesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 60, 30));
+        sidebarPanel.add(expensesButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 60, 40));
 
         reportButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         reportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/report.png"))); // NOI18N
@@ -105,26 +91,11 @@ public class MainGUI extends javax.swing.JFrame {
                 reportButtonActionPerformed(evt);
             }
         });
-        sidebarPanel.add(reportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 290, 60, 40));
-
-        settingsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        settingsButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/settings.png"))); // NOI18N
-        settingsButton.setBorderPainted(false);
-        settingsButton.setContentAreaFilled(false);
-        settingsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsButtonActionPerformed(evt);
-            }
-        });
-        sidebarPanel.add(settingsButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 60, -1));
-
-        logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        logoutButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/logout.png"))); // NOI18N
-        logoutButton.setBorderPainted(false);
-        logoutButton.setContentAreaFilled(false);
-        sidebarPanel.add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 60, 40));
+        sidebarPanel.add(reportButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 60, 40));
 
         getContentPane().add(sidebarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        contentPanel.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(contentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 0, 900, 600));
 
         pack();
@@ -152,20 +123,6 @@ public class MainGUI extends javax.swing.JFrame {
         contentPanel.repaint();
     }//GEN-LAST:event_reportButtonActionPerformed
 
-    private void dashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardButtonActionPerformed
-        contentPanel.removeAll(); // Remove any existing components from the content panel
-        contentPanel.add(dashboardPanel);
-        contentPanel.revalidate(); // Refresh the layout of the content panel
-        contentPanel.repaint();
-    }//GEN-LAST:event_dashboardButtonActionPerformed
-
-    private void settingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsButtonActionPerformed
-        contentPanel.removeAll(); // Remove any existing components from the content panel
-        contentPanel.add(settingsPanel);
-        contentPanel.revalidate(); // Refresh the layout of the content panel
-        contentPanel.repaint();
-    }//GEN-LAST:event_settingsButtonActionPerformed
-
     private void menuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuButtonActionPerformed
         // Toggle the sidebar panel's preferred size when the menu button is clicked
         if (sidebarPanel.getPreferredSize().width == 60) {
@@ -180,14 +137,11 @@ public class MainGUI extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel contentPanel;
-    private javax.swing.JButton dashboardButton;
     private javax.swing.JButton expensesButton;
     private javax.swing.JButton incomeButton;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JButton logoutButton;
     private javax.swing.JButton menuButton;
     private javax.swing.JButton reportButton;
-    private javax.swing.JButton settingsButton;
     private javax.swing.JPanel sidebarPanel;
     // End of variables declaration//GEN-END:variables
 }

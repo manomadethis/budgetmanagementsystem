@@ -1,8 +1,26 @@
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.List;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
+import javax.swing.JOptionPane;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -35,9 +53,8 @@ public class ReportPanel extends javax.swing.JPanel {
         calendar = new com.toedter.calendar.JCalendar();
         sortByLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        expenseButton = new javax.swing.JButton();
-        categoryButton = new javax.swing.JButton();
-        totalButton = new javax.swing.JButton();
+        sortByExpenseButton = new javax.swing.JButton();
+        sortByCategoryButton = new javax.swing.JButton();
         reportScrollPane1 = new javax.swing.JScrollPane();
         reportTable = new javax.swing.JTable();
         reportLabel1 = new javax.swing.JLabel();
@@ -49,6 +66,10 @@ public class ReportPanel extends javax.swing.JPanel {
         budgetField = new javax.swing.JTextField();
         actualSpentField = new javax.swing.JTextField();
         populateReportTableButton = new javax.swing.JButton();
+        clearTableButton = new javax.swing.JButton();
+        chartPanel = new javax.swing.JPanel();
+        generateChartButton = new javax.swing.JButton();
+        backgroundImage = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(900, 600));
@@ -65,41 +86,31 @@ public class ReportPanel extends javax.swing.JPanel {
 
         sortByLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         sortByLabel.setText("Sort by:");
-        add(sortByLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 60, 40));
+        add(sortByLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 10, 60, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Select Date:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 100, 30));
 
-        expenseButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        expenseButton.setBackground(new java.awt.Color(82, 252, 138));
-        expenseButton.setText("Expense");
-        expenseButton.addActionListener(new java.awt.event.ActionListener() {
+        sortByExpenseButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        sortByExpenseButton.setBackground(new java.awt.Color(82, 252, 138));
+        sortByExpenseButton.setText("Expense");
+        sortByExpenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                expenseButtonActionPerformed(evt);
+                sortByExpenseButtonActionPerformed(evt);
             }
         });
-        add(expenseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, -1, -1));
+        add(sortByExpenseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, -1, -1));
 
-        categoryButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        categoryButton.setBackground(new java.awt.Color(49, 164, 255));
-        categoryButton.setText("Category");
-        categoryButton.addActionListener(new java.awt.event.ActionListener() {
+        sortByCategoryButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        sortByCategoryButton.setBackground(new java.awt.Color(49, 164, 255));
+        sortByCategoryButton.setText("Category");
+        sortByCategoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                categoryButtonActionPerformed(evt);
+                sortByCategoryButtonActionPerformed(evt);
             }
         });
-        add(categoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
-
-        totalButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        totalButton.setBackground(new java.awt.Color(251, 255, 50));
-        totalButton.setText("Total");
-        totalButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalButtonActionPerformed(evt);
-            }
-        });
-        add(totalButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
+        add(sortByCategoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
         reportScrollPane1.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
 
@@ -138,6 +149,7 @@ public class ReportPanel extends javax.swing.JPanel {
         calculateDailyReportButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         calculateDailyReportButton.setBackground(new java.awt.Color(51, 255, 255));
         calculateDailyReportButton.setText("Calculate");
+        calculateDailyReportButton.setBorderPainted(false);
         calculateDailyReportButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 calculateDailyReportButtonActionPerformed(evt);
@@ -178,26 +190,91 @@ public class ReportPanel extends javax.swing.JPanel {
 
         populateReportTableButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         populateReportTableButton.setBackground(new java.awt.Color(51, 255, 255));
-        populateReportTableButton.setText("Populate Table");
+        populateReportTableButton.setText("POPULATE TABLE");
+        populateReportTableButton.setBorderPainted(false);
         populateReportTableButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 populateReportTableButtonActionPerformed(evt);
             }
         });
-        add(populateReportTableButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, -1, -1));
+        add(populateReportTableButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 560, -1, -1));
+
+        clearTableButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        clearTableButton.setBackground(new java.awt.Color(255, 0, 102));
+        clearTableButton.setText("CLEAR TABLE");
+        clearTableButton.setBorderPainted(false);
+        clearTableButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearTableButtonActionPerformed(evt);
+            }
+        });
+        add(clearTableButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 560, -1, -1));
+
+        chartPanel.setBackground(new java.awt.Color(255, 255, 255));
+        add(chartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 320, 250));
+
+        generateChartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        generateChartButton.setBackground(new java.awt.Color(255, 49, 251));
+        generateChartButton.setText("GENERATE CHART");
+        generateChartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generateChartButtonActionPerformed(evt);
+            }
+        });
+        add(generateChartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 560, -1, -1));
+
+        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/report_bg.jpg"))); // NOI18N
+        add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void expenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expenseButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_expenseButtonActionPerformed
+    private void sortByExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        DefaultTableModel reportTableModel = (DefaultTableModel) reportTable.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(reportTableModel);
+        reportTable.setRowSorter(sorter);
+    
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        if (sorter.getSortKeys().isEmpty()) {
+            // sort by column 0 (Expense) in ascending order if no sort keys are present
+            sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        } else {
+            // toggle between descending and ascending order for the primary sort key
+            RowSorter.SortKey sortKey = sorter.getSortKeys().get(0);
+            int columnIndex = sortKey.getColumn();
+            SortOrder sortOrder = sortKey.getSortOrder();
+            if (sortOrder == SortOrder.ASCENDING) {
+                sortKeys.add(new RowSorter.SortKey(columnIndex, SortOrder.DESCENDING)); // sort in descending order
+            } else {
+                sortKeys.add(new RowSorter.SortKey(columnIndex, SortOrder.ASCENDING)); // sort in ascending order
+            }
+        }
+        sorter.setSortKeys(sortKeys);
+        sorter.sort();
+    }
 
-    private void categoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryButtonActionPerformed
-        
-    }//GEN-LAST:event_categoryButtonActionPerformed
-
-    private void totalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalButtonActionPerformed
-        
-    }//GEN-LAST:event_totalButtonActionPerformed
+    private void sortByCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+        DefaultTableModel reportTableModel = (DefaultTableModel) reportTable.getModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(reportTableModel);
+        reportTable.setRowSorter(sorter);
+    
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        if (sorter.getSortKeys().isEmpty()) {
+            // sort by column 1 (Category) in ascending order if no sort keys are present
+            sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+        } else {
+            // toggle between descending and ascending order for the primary sort key
+            RowSorter.SortKey sortKey = sorter.getSortKeys().get(0);
+            int columnIndex = sortKey.getColumn();
+            SortOrder sortOrder = sortKey.getSortOrder();
+            if (sortOrder == SortOrder.ASCENDING) {
+                sortKeys.add(new RowSorter.SortKey(columnIndex, SortOrder.DESCENDING)); // sort in descending order
+            } else {
+                sortKeys.add(new RowSorter.SortKey(columnIndex, SortOrder.ASCENDING)); // sort in ascending order
+            }
+        }
+        sorter.setSortKeys(sortKeys);
+        sorter.sort();
+    }
+    
 
     private void differenceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_differenceFieldActionPerformed
         
@@ -210,6 +287,92 @@ public class ReportPanel extends javax.swing.JPanel {
     private void budgetFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_budgetFieldActionPerformed
     
     }//GEN-LAST:event_budgetFieldActionPerformed
+
+    private void generateChartButtonActionPerformed(java.awt.event.ActionEvent evt) {    
+        
+        // Check if the reportTable model is empty
+    if (reportTable.getModel().getRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "The report table is empty.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+        // Create the PieDataset object
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        
+        // Get the data from the "Actual Spent" column of the reportTable table
+        DefaultTableModel model = (DefaultTableModel) reportTable.getModel();
+        int numRows = model.getRowCount();
+        double totalAmount = 0;
+        Map<String, Double> categoryAmountMap = new HashMap<String, Double>();
+        for (int i = 0; i < numRows; i++) {
+            String category = model.getValueAt(i, 1).toString(); // Use column index 1 for "Category"
+            double amount = Double.parseDouble(model.getValueAt(i, 3).toString()); // Use column index 3 for "Actual Spent"
+            
+            // Add amount to total amount
+            totalAmount += amount;
+            
+            // Add amount to categoryAmountMap
+            if (categoryAmountMap.containsKey(category)) {
+                categoryAmountMap.put(category, categoryAmountMap.get(category) + amount);
+            } else {
+                categoryAmountMap.put(category, amount);
+            }
+        }
+        
+        // Add category percentages to dataset
+        for (String category : categoryAmountMap.keySet()) {
+            double categoryAmount = categoryAmountMap.get(category);
+            double categoryPercentage = (categoryAmount / totalAmount) * 100;
+            dataset.setValue(category, categoryPercentage);
+        }
+      
+        // Create the JFreeChart object
+        JFreeChart chart = ChartFactory.createPieChart(
+            "Expense Categories",  // chart title
+            dataset,               // pie dataset
+            true,                  // include legend
+            true,                  // use tooltips
+            false                  // generate URLs
+        );
+    
+        // Customize the chart
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setSectionPaint("Entertainment", Color.RED);
+        plot.setSectionPaint("Food", Color.GREEN);
+        plot.setSectionPaint("Transportation", Color.BLUE);
+        plot.setSectionPaint("Housing", Color.YELLOW);
+        plot.setSectionPaint("Other", Color.MAGENTA);
+    
+        // Create the ChartPanel object and add it to the UI
+        ChartPanel panel = new ChartPanel(chart);
+        panel.setPreferredSize(new java.awt.Dimension(320, 250));
+        chartPanel.removeAll();
+        chartPanel.add(panel);
+        chartPanel.revalidate();
+        chartPanel.repaint();
+    }
+    
+    
+    private static final Random rand = new Random();
+    
+    public static Color generateRandomColor() {
+        // Generate a random RGB color
+        int r = rand.nextInt(256);
+        int g = rand.nextInt(256);
+        int b = rand.nextInt(256);
+        return new Color(r, g, b);
+    }
+
+    private void clearTableButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        // Get the table model from the reportTable
+        DefaultTableModel reportTableModel = (DefaultTableModel) reportTable.getModel();
+    
+        // Clear the reportTableModel
+        reportTableModel.setRowCount(0);
+    
+        // Set the reportTableModel as the model for the reportTable
+        reportTable.setModel(reportTableModel);
+    }
+    
 
     private void populateReportTableButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // Get the selected date from the calendar
@@ -230,9 +393,13 @@ public class ReportPanel extends javax.swing.JPanel {
             Driver.importTable(transportationModel, Expense.expensesFolder, "transportationTable.txt", selectedDate);
             Driver.importTable(housingModel, Expense.expensesFolder, "housingTable.txt", selectedDate);
             Driver.importTable(otherModel, Expense.expensesFolder, "otherTable.txt", selectedDate);
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "One or more expense tables were not found for the selected date.");
+            return; // close the method if a file is not found
         } catch (IOException e) {
             e.printStackTrace();
         }
+    
     
         // Clear the reportTableModel before adding new data
         reportTableModel.setRowCount(0);
@@ -262,7 +429,33 @@ public class ReportPanel extends javax.swing.JPanel {
     }
 
     private void calculateDailyReportButtonActionPerformed(java.awt.event.ActionEvent evt) {
-
+        DefaultTableModel reportTableModel = (DefaultTableModel) reportTable.getModel();
+        float totalBudget = 0;
+        float totalActualSpent = 0;
+        float totalDifference = 0;
+        
+        for (int i = 0; i < reportTableModel.getRowCount(); i++) {
+            // Get the values from columns 2, 3, and 4
+            float budget = Float.parseFloat(reportTableModel.getValueAt(i, 2).toString());
+            float actualSpent = Float.parseFloat(reportTableModel.getValueAt(i, 3).toString());
+            float difference = Float.parseFloat(reportTableModel.getValueAt(i, 4).toString());
+            
+            // Add them to the running total
+            totalBudget += budget;
+            totalActualSpent += actualSpent;
+            totalDifference += difference;
+        }
+        
+        // Set the static variables in the Report class
+        Report.dailyTotalBudget = totalBudget;
+        Report.dailyTotalActualSpent = totalActualSpent;
+        Report.dailyTotalDifference = totalDifference;
+        
+        // Convert to currency format and set the values to the textfields
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+        budgetField.setText(currencyFormat.format(totalBudget));
+        actualSpentField.setText(currencyFormat.format(totalActualSpent));
+        differenceField.setText(currencyFormat.format(totalBudget - totalActualSpent));
     }
 
 
@@ -270,21 +463,24 @@ public class ReportPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField actualSpentField;
     private javax.swing.JLabel actualSpentLabel1;
+    private javax.swing.JLabel backgroundImage;
     private javax.swing.JTextField budgetField;
     private javax.swing.JLabel budgetLabel1;
     private javax.swing.JButton calculateDailyReportButton;
     private com.toedter.calendar.JCalendar calendar;
-    private javax.swing.JButton categoryButton;
+    private javax.swing.JPanel chartPanel;
+    private javax.swing.JButton clearTableButton;
     private javax.swing.JTextField differenceField;
     private javax.swing.JLabel differenceLabel;
-    private javax.swing.JButton expenseButton;
+    private javax.swing.JButton generateChartButton;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton populateReportTableButton;
     private javax.swing.JLabel reportLabel;
     private javax.swing.JLabel reportLabel1;
     private javax.swing.JScrollPane reportScrollPane1;
     private javax.swing.JTable reportTable;
+    private javax.swing.JButton sortByCategoryButton;
+    private javax.swing.JButton sortByExpenseButton;
     private javax.swing.JLabel sortByLabel;
-    private javax.swing.JButton totalButton;
     // End of variables declaration//GEN-END:variables
 }
