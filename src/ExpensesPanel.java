@@ -100,6 +100,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         loadButton = new javax.swing.JButton();
         addDataButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
+        calculateDifferenceButton = new javax.swing.JButton();
 
         setAutoscrolls(true);
 
@@ -228,6 +229,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         entertainmentTable.setInheritsPopupMenu(true);
         entertainmentTable.setName("entertainmentTable");
         CurrencyRenderer.formatCurrencyColumns(entertainmentTable, 1, 2, 3);
+        entertainmentTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
         entertainmentTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         entertainmentTable.setShowGrid(true);
         entertainmentTable.setSurrendersFocusOnKeystroke(true);
@@ -252,6 +254,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         foodTable.setToolTipText("Double-click to edit data");
         foodTable.setGridColor(new java.awt.Color(112, 0, 73));
         foodTable.setName("foodTable");
+        foodTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
         foodTable.setShowGrid(true);
         CurrencyRenderer.formatCurrencyColumns(foodTable, 1, 2, 3);
         foodScrollPane.setViewportView(foodTable);
@@ -275,6 +278,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         transportationTable.setToolTipText("Double-click to edit data");
         transportationTable.setGridColor(new java.awt.Color(112, 0, 73));
         transportationTable.setName("transportationTable");
+        transportationTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
         transportationTable.setShowGrid(true);
         CurrencyRenderer.formatCurrencyColumns(transportationTable, 1, 2, 3);
         transportationScrollPane.setViewportView(transportationTable);
@@ -301,6 +305,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         housingTable.setToolTipText("Double-click to edit data");
         housingTable.setGridColor(new java.awt.Color(112, 0, 73));
         housingTable.setName("housingTable");
+        housingTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
         housingTable.setShowGrid(true);
         CurrencyRenderer.formatCurrencyColumns(housingTable, 1, 2, 3);
         housingScrollPane.setViewportView(housingTable);
@@ -328,6 +333,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         otherTable.setInheritsPopupMenu(true);
         otherTable.setName("otherTable");
         CurrencyRenderer.formatCurrencyColumns(otherTable, 1, 2, 3);
+        otherTable.setSelectionBackground(new java.awt.Color(204, 204, 204));
         otherTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         otherTable.setShowGrid(true);
         otherTable.setSurrendersFocusOnKeystroke(true);
@@ -384,6 +390,16 @@ public class ExpensesPanel extends javax.swing.JPanel {
             }
         });
         expensesPanel.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 120, -1));
+
+        saveTableButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        calculateDifferenceButton.setBackground(new java.awt.Color(251, 255, 50));
+        calculateDifferenceButton.setText("CALCULATE DIFFERENCE");
+        calculateDifferenceButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculateDifferenceButtonActionPerformed(evt);
+            }
+        });
+        expensesPanel.add(calculateDifferenceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -459,7 +475,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
                 case "otherTable":
                     dataList = Expense.otherData;
                     break;
-            }
+                }
             if (dataList != null) {
                 if (rowCount > 0) {
                     dataList.clear();
@@ -480,8 +496,10 @@ public class ExpensesPanel extends javax.swing.JPanel {
                 } else {
                     JOptionPane.showMessageDialog(this, "There is nothing to save!", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
-            }
-        }
+            } else {
+                JOptionPane.showMessageDialog(this, "The table is empty", "Warning", JOptionPane.WARNING_MESSAGE);
+             }
+        }        
     }//GEN-LAST:event_saveTableButtonActionPerformed
 
     private void clearAllTablesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearAllTablesButtonActionPerformed
@@ -528,11 +546,11 @@ public class ExpensesPanel extends javax.swing.JPanel {
             housingModel.setRowCount(0);
             otherModel.setRowCount(0);
 
-            Expense.importTable(entertainmentModel, "entertainment.txt", selectedDate);
-            Expense.importTable(foodModel, "food.txt", selectedDate);
-            Expense.importTable(transportationModel, "transportation.txt", selectedDate);
-            Expense.importTable(housingModel, "housing.txt", selectedDate);
-            Expense.importTable(otherModel, "other.txt", selectedDate);
+            Expense.importTable(entertainmentModel, "entertainmentTable.txt", selectedDate);
+            Expense.importTable(foodModel, "foodTable.txt", selectedDate);
+            Expense.importTable(transportationModel, "transportationTable.txt", selectedDate);
+            Expense.importTable(housingModel, "housingTable.txt", selectedDate);
+            Expense.importTable(otherModel, "otherTable.txt", selectedDate);
 
             // Notify the user that the tables have been imported
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
@@ -592,13 +610,75 @@ public class ExpensesPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a date.");
             return;
         }
+
+        DefaultTableModel entertainmentModel = (DefaultTableModel) entertainmentTable.getModel();
+        DefaultTableModel foodModel = (DefaultTableModel) foodTable.getModel();
+        DefaultTableModel transportationModel = (DefaultTableModel) transportationTable.getModel();
+        DefaultTableModel housingModel = (DefaultTableModel) housingTable.getModel();
+        DefaultTableModel otherModel = (DefaultTableModel) otherTable.getModel();
+
+        // Check if any of the tables are empty
+        if (Expense.checkEmpty(entertainmentModel) || Expense.checkEmpty(foodModel) ||
+            Expense.checkEmpty(transportationModel) || Expense.checkEmpty(housingModel) ||
+            Expense.checkEmpty(otherModel)) {
+            JOptionPane.showMessageDialog(null, "One or more tables are empty.");
+            return;
+        }
+
+        // Get the data from each table model and add to respective data list
+        ArrayList<List<String>> entertainmentDataList = new ArrayList<>();
+        for (int i = 0; i < entertainmentModel.getRowCount(); i++) {
+            List<String> row = new ArrayList<>();
+            for (int j = 0; j < entertainmentModel.getColumnCount(); j++) {
+                row.add(entertainmentModel.getValueAt(i, j).toString());
+            }
+            entertainmentDataList.add(row);
+        }
+
+        ArrayList<List<String>> foodDataList = new ArrayList<>();
+        for (int i = 0; i < foodModel.getRowCount(); i++) {
+            List<String> row = new ArrayList<>();
+            for (int j = 0; j < foodModel.getColumnCount(); j++) {
+                row.add(foodModel.getValueAt(i, j).toString());
+            }
+            foodDataList.add(row);
+        }
+
+        ArrayList<List<String>> transportationDataList = new ArrayList<>();
+        for (int i = 0; i < transportationModel.getRowCount(); i++) {
+            List<String> row = new ArrayList<>();
+            for (int j = 0; j < transportationModel.getColumnCount(); j++) {
+                row.add(transportationModel.getValueAt(i, j).toString());
+            }
+            transportationDataList.add(row);
+        }
+
+        ArrayList<List<String>> housingDataList = new ArrayList<>();
+        for (int i = 0; i < housingModel.getRowCount(); i++) {
+            List<String> row = new ArrayList<>();
+            for (int j = 0; j < housingModel.getColumnCount(); j++) {
+                row.add(housingModel.getValueAt(i, j).toString());
+            }
+            housingDataList.add(row);
+        }
+
+        ArrayList<List<String>> otherDataList = new ArrayList<>();
+        for (int i = 0; i < otherModel.getRowCount(); i++) {
+            List<String> row = new ArrayList<>();
+            for (int j = 0; j < otherModel.getColumnCount(); j++) {
+                row.add(otherModel.getValueAt(i, j).toString());
+            }
+            otherDataList.add(row);
+        }
+
         // Export the tables using the selected date
         try {
-            Expense.exportTable(Expense.entertainmentData, "entertainment.txt", selectedDate);
-            Expense.exportTable(Expense.foodData, "food.txt", selectedDate);
-            Expense.exportTable(Expense.transportationData, "transportation.txt", selectedDate);
-            Expense.exportTable(Expense.housingData, "housing.txt", selectedDate);
-            Expense.exportTable(Expense.otherData, "other.txt", selectedDate);
+            Expense.exportTable(entertainmentDataList, "entertainmentTable.txt");
+            Expense.exportTable(foodDataList, "foodTable.txt");
+            Expense.exportTable(transportationDataList, "transportationTable.txt");
+            Expense.exportTable(housingDataList, "housingTable.txt");
+            Expense.exportTable(otherDataList, "otherTable.txt");
+
             // Format the date string in MMMM, dd, yyyy format
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
             String dateString = dateFormat.format(selectedDate);
@@ -609,9 +689,14 @@ public class ExpensesPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error exporting tables: " + ex.getMessage());
         }
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void calculateDifferenceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateDifferenceButtonActionPerformed
+        Expense.calculateDifference(visibleTable());
+    }//GEN-LAST:event_calculateDifferenceButtonActionPerformed
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataButton;
+    private javax.swing.JButton calculateDifferenceButton;
     private com.toedter.calendar.JCalendar calendar;
     private javax.swing.JButton clearAllTablesButton;
     private javax.swing.JButton deleteButton;

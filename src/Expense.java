@@ -110,8 +110,8 @@ public class Expense {
                 model.addRow(data);
                 dataList.add(Arrays.asList(data));
             }
-       }
-       catch (FileNotFoundException e) {
+    }
+    catch (FileNotFoundException e) {
                 JOptionPane.showMessageDialog(null, "File not found: " + filename, "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -143,6 +143,35 @@ public class Expense {
             }
         }
     }
+
+    public static boolean checkEmpty(DefaultTableModel model) {
+        int rowCount = model.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 1; j < model.getColumnCount(); j++) {
+                if (model.getValueAt(i, j) != null && !model.getValueAt(i, j).toString().isEmpty()) {
+                    // Return false if any row has data other than the first column
+                    return false;
+                }
+            }
+        }
+        // Return true if all rows have no data except for the first column
+        return true;
+    }
     
+    public static void calculateDifference(javax.swing.JTable table) {
+        javax.swing.table.TableModel model = table.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            int budget = Integer.parseInt(model.getValueAt(i, 1).toString());
+            int actualSpent = Integer.parseInt(model.getValueAt(i, 2).toString());
+            int difference = budget - actualSpent;
+            model.setValueAt(difference, i, 3);
+
+            javax.swing.table.DefaultTableCellRenderer renderer = new javax.swing.table.DefaultTableCellRenderer();
+            renderer.setForeground(table.getForeground());
+            table.getColumnModel().getColumn(3).setCellRenderer(renderer);
+            CurrencyRenderer.formatCurrencyColumns(table, 1, 2, 3);
+            
+        }
+    }
     
 }
