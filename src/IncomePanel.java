@@ -4,6 +4,7 @@
  */
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
+import java.awt.Cursor;
 
 /**
  *
@@ -155,7 +156,6 @@ public class IncomePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jAddButtonActionPerformed
 
     private void jDelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDelButtonActionPerformed
-        // TODO add your handling code here:
        // Get the contents of the text fields
     String textSource = jTxtSrc.getText();
     String textAmount = jTxtAmt.getText();
@@ -189,7 +189,7 @@ public class IncomePanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Please enter text in both fields.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
-    }//GEN-LAST:event_jDelButtonActionPerformed
+    //GEN-LAST:event_jDelButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
