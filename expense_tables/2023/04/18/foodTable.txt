@@ -1,4 +1,4 @@
 Breakfast	10	10	0.0	
 Lunch	25	23.50	1.5	
-Dinner	30	29.99	0.010000229	
+Dinner	30	29.99	0.01	
 Drinks	10	12	-2.0	

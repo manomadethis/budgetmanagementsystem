@@ -400,7 +400,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         });
         expensesPanel.add(saveExpenseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 120, -1));
 
-        saveTableButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        calculateDifferenceButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         calculateDifferenceButton.setBackground(new java.awt.Color(251, 255, 50));
         calculateDifferenceButton.setText("CALCULATE DIFFERENCE");
         calculateDifferenceButton.addActionListener(new java.awt.event.ActionListener() {
@@ -707,6 +707,25 @@ public class ExpensesPanel extends javax.swing.JPanel {
         Expense.calculateDifference(visibleTable());
     }//GEN-LAST:event_calculateDifferenceButtonActionPerformed
 
+    public JTable getFoodTable() {
+        return foodTable;
+    }
+
+    public JTable getEntertainmentTable() {
+        return entertainmentTable;
+    }
+
+    public JTable getTransportationTable() {
+        return transportationTable;
+    }
+
+    public JTable getHousingTable() {
+        return housingTable;
+    }
+
+    public JTable getOtherTable() {
+        return otherTable;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataButton;
     private javax.swing.JLabel backgroundImage;
