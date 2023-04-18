@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-
 /**
  *
  * @author Felicia
@@ -56,6 +51,7 @@ public class ReportPanel extends javax.swing.JPanel {
 
         reportLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         reportLabel.setText("Report");
+        reportPanel.add(reportLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, 70, 50));
         reportPanel.add(reportLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 70, 40));
 
         jLabel3.setText("Expenses details");
@@ -179,12 +175,24 @@ public class ReportPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 900, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(reportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(reportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 247, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 599, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(reportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(reportPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 14, Short.MAX_VALUE))

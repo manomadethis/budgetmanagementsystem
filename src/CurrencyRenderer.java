@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.text.NumberFormat;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -12,6 +13,15 @@ public class CurrencyRenderer extends DefaultTableCellRenderer {
         if (value != null) {
             Double amount = Double.parseDouble(value.toString());
             setText(NumberFormat.getCurrencyInstance().format(amount));
+
+            if (amount < 0) {
+                setForeground(Color.RED);
+            } else {
+            if (amount >= 0) {
+                setForeground(Color.BLACK);
+                }
+            }
+
         } else {
             setText("");
         }
