@@ -1,5 +1,7 @@
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.List;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -65,6 +67,9 @@ public class BudgetGUI extends javax.swing.JFrame {
         tabbedPane = new javax.swing.JTabbedPane();
         dashboardPanel = new javax.swing.JPanel();
         dashboardLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jHomeTable = new javax.swing.JTable();
+        jTotalButton = new javax.swing.JButton();
         budgetPanel = new javax.swing.JPanel();
         incomeLabel = new javax.swing.JLabel();
         reportPanel = new javax.swing.JPanel();
@@ -183,8 +188,37 @@ public class BudgetGUI extends javax.swing.JFrame {
         dashboardPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dashboardLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        dashboardLabel.setText("Dashboard");
-        dashboardPanel.add(dashboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 100, 50));
+        dashboardLabel.setText("Home");
+        dashboardPanel.add(dashboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 100, 50));
+
+        jHomeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Entertainment", null},
+                {"Food", null},
+                {"Travel", null},
+                {"Housing", null},
+                {null, null},
+                {"Total", null}
+            },
+            new String [] {
+                "Category Totals", ""
+            }
+        ));
+        jScrollPane1.setViewportView(jHomeTable);
+        if (jHomeTable.getColumnModel().getColumnCount() > 0) {
+            jHomeTable.getColumnModel().getColumn(0).setHeaderValue("Category Totals");
+            jHomeTable.getColumnModel().getColumn(1).setHeaderValue("");
+        }
+
+        dashboardPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 390, 150));
+
+        jTotalButton.setText("Calculate Total");
+        jTotalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTotalButtonActionPerformed(evt);
+            }
+        });
+        dashboardPanel.add(jTotalButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, -1, -1));
 
         tabbedPane.addTab("Dashboard", dashboardPanel);
 
@@ -414,7 +448,7 @@ public class BudgetGUI extends javax.swing.JFrame {
         // Toggle the sidebar panel's preferred size when the menu button is clicked
         if (sidebarPanel.getPreferredSize().width == 60) {
             sidebarPanel.setPreferredSize(new Dimension(200, 600));
-        } else {
+        } else { 
             sidebarPanel.setPreferredSize(new Dimension(60, 600));
         }
         // Repack the JFrame to adjust its size to the new preferred size of the sidebar panel
@@ -445,6 +479,32 @@ public class BudgetGUI extends javax.swing.JFrame {
         housingTable.setVisible(true);
     }//GEN-LAST:event_housingButtonActionPerformed
 
+    private void jTotalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTotalButtonActionPerformed
+        /*// TODO add your handling code here:
+        jHomeTable model = jHomeTable.getModel();
+
+// Create an ArrayList to hold the row totals
+        //List<Double> rowTotals = new ArrayList<>();
+
+// Iterate over the rows in the table model and add up the values in the desired columns
+        for (int i = 0; i < model.getRowCount(); i++) {
+            double total = 0.0;
+            for (int j = 0; j < model.getColumnCount(); j++) {
+                Object value = model.getValueAt(i, j);
+                if (value instanceof Number) {
+                    total += ((Number) value).doubleValue();
+                }
+            }
+        rowTotals.add(total);
+        }
+
+// Create a new column in the table model to display the row totals
+        model.addColumn("Total", rowTotals.toArray());
+        
+// Update the UI to display the new column
+       jHomeTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);*/
+    }//GEN-LAST:event_jTotalButtonActionPerformed
+
     private void travelButtonActionPerformed(java.awt.event.ActionEvent evt) {                                              
         clearTables();
         travelScrollPane.setVisible(true);
@@ -456,6 +516,8 @@ public class BudgetGUI extends javax.swing.JFrame {
         entertainmentScrollPane.setVisible(true);
         entertainmentTable.setVisible(true);
     }
+    
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -482,8 +544,11 @@ public class BudgetGUI extends javax.swing.JFrame {
     private javax.swing.JButton incomeButton;
     private javax.swing.JLabel incomeLabel;
     private javax.swing.JButton jButton2;
+    private javax.swing.JTable jHomeTable;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JButton jTotalButton;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton menuButton;
     private javax.swing.JButton reportButton;
