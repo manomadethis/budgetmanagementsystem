@@ -66,7 +66,7 @@ public class Driver {
         String dateFolder = dateFormat.format(selectedDate);
         File folder = new File(folderName + dateFolder);
         folder.mkdirs();
-            
+    
         FileWriter writer = new FileWriter(folderName + dateFolder + "/" + filename);
         for (List<String> row : dataList) {
             for (String value : row) {
@@ -76,6 +76,7 @@ public class Driver {
         }
         writer.close();
     }
+    
 
     public static void importTable(DefaultTableModel model, String folderName, String filename, Date selectedDate) throws IOException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");

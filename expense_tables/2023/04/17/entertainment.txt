@@ -1,5 +1,0 @@
-Amusement Park	0	0	0	
-Concert	0	0	0	
-Hotel stay	0	0	0	
-Games	0	0	0	
-Party	0	0	0	

@@ -98,9 +98,9 @@ public class ExpensesPanel extends javax.swing.JPanel {
         otherScrollPane = new javax.swing.JScrollPane();
         otherTable = new javax.swing.JTable();
         deleteButton = new javax.swing.JButton();
-        loadButton = new javax.swing.JButton();
+        loadExpenseButton = new javax.swing.JButton();
         addDataButton = new javax.swing.JButton();
-        saveButton = new javax.swing.JButton();
+        saveExpenseButton = new javax.swing.JButton();
         calculateDifferenceButton = new javax.swing.JButton();
         backgroundImage = new javax.swing.JLabel();
 
@@ -245,6 +245,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
 
         foodScrollPane.setAutoscrolls(true);
 
+        foodTable.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         foodTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Breakfast", "0", "0", "0"},
@@ -268,6 +269,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
 
         transportationScrollPane.setAutoscrolls(true);
 
+        transportationTable.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         transportationTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Flight", "0", "0", "0"},
@@ -292,6 +294,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
 
         housingScrollPane.setAutoscrolls(true);
 
+        housingTable.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         housingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {" Rent/Mortgage", "0", "0", "0"},
@@ -320,6 +323,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         otherScrollPane.setAutoscrolls(true);
 
         otherTable.setAutoCreateRowSorter(true);
+        otherTable.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         otherTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Expense 1", "0", "0", "0"},
@@ -358,19 +362,19 @@ public class ExpensesPanel extends javax.swing.JPanel {
         });
         expensesPanel.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 550, -1, -1));
 
-        loadButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        loadButton.setBackground(new java.awt.Color(57, 255, 50));
-        loadButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loadButton.setText("LOAD");
-        loadButton.setToolTipText("Load all tables for the selected date");
-        loadButton.setAutoscrolls(true);
-        loadButton.setBorderPainted(false);
-        loadButton.addActionListener(new java.awt.event.ActionListener() {
+        loadExpenseButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        loadExpenseButton.setBackground(new java.awt.Color(57, 255, 50));
+        loadExpenseButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        loadExpenseButton.setText("LOAD");
+        loadExpenseButton.setToolTipText("Load all tables for the selected date");
+        loadExpenseButton.setAutoscrolls(true);
+        loadExpenseButton.setBorderPainted(false);
+        loadExpenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadButtonActionPerformed(evt);
+                loadExpenseButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(loadButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, 110, -1));
+        expensesPanel.add(loadExpenseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, 110, -1));
 
         addDataButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         addDataButton.setBackground(new java.awt.Color(57, 255, 50));
@@ -382,19 +386,19 @@ public class ExpensesPanel extends javax.swing.JPanel {
         });
         expensesPanel.add(addDataButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, -1, -1));
 
-        saveButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        saveButton.setBackground(new java.awt.Color(51, 255, 255));
-        saveButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        saveButton.setText("SAVE");
-        saveButton.setToolTipText("Save all tables for the selected date");
-        saveButton.setAutoscrolls(true);
-        saveButton.setBorderPainted(false);
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
+        saveExpenseButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        saveExpenseButton.setBackground(new java.awt.Color(51, 255, 255));
+        saveExpenseButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        saveExpenseButton.setText("SAVE");
+        saveExpenseButton.setToolTipText("Save all tables for the selected date");
+        saveExpenseButton.setAutoscrolls(true);
+        saveExpenseButton.setBorderPainted(false);
+        saveExpenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveButtonActionPerformed(evt);
+                saveExpenseButtonActionPerformed(evt);
             }
         });
-        expensesPanel.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 120, -1));
+        expensesPanel.add(saveExpenseButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 270, 120, -1));
 
         saveTableButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         calculateDifferenceButton.setBackground(new java.awt.Color(251, 255, 50));
@@ -426,7 +430,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(expensesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(expensesPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -531,7 +535,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_clearAllTablesButtonActionPerformed
 
-    private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
+    private void loadExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadExpenseButtonActionPerformed
         // Get the selected date from the calendar
         Date selectedDate = calendar.getDate();
         if (selectedDate == null) {
@@ -561,7 +565,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
             Driver.importTable(otherModel, Expense.expensesFolder, "otherTable.txt", selectedDate);
 
             // Notify the user that the tables have been imported
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
             String dateString = dateFormat.format(selectedDate);
             
             entertainmentTable.setModel(entertainmentModel);
@@ -575,7 +579,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
             // Notify the user of any errors during the import process
             JOptionPane.showMessageDialog(null, "Error importing tables: " + ex.getMessage());
         }
-    }//GEN-LAST:event_loadButtonActionPerformed
+    }//GEN-LAST:event_loadExpenseButtonActionPerformed
 
     private void addDataButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDataButtonActionPerformed
         // Get the currently visible table
@@ -610,7 +614,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+    private void saveExpenseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveExpenseButtonActionPerformed
         // Get the selected date from the calendar
         Date selectedDate = calendar.getDate();
         if (selectedDate == null) {
@@ -633,62 +637,63 @@ public class ExpensesPanel extends javax.swing.JPanel {
             return;
         }
 
+        Expense.entertainmentData.clear();
+        Expense.foodData.clear();
+        Expense.transportationData.clear();
+        Expense.housingData.clear();
+        Expense.otherData.clear();
+
         // Get the data from each table model and add to respective data list
-        ArrayList<List<String>> entertainmentDataList = new ArrayList<>();
         for (int i = 0; i < entertainmentModel.getRowCount(); i++) {
             List<String> row = new ArrayList<>();
             for (int j = 0; j < entertainmentModel.getColumnCount(); j++) {
                 row.add(entertainmentModel.getValueAt(i, j).toString());
             }
-            entertainmentDataList.add(row);
+            Expense.entertainmentData.add(row);
         }
 
-        ArrayList<List<String>> foodDataList = new ArrayList<>();
         for (int i = 0; i < foodModel.getRowCount(); i++) {
             List<String> row = new ArrayList<>();
             for (int j = 0; j < foodModel.getColumnCount(); j++) {
                 row.add(foodModel.getValueAt(i, j).toString());
             }
-            foodDataList.add(row);
+            Expense.foodData.add(row);
         }
 
-        ArrayList<List<String>> transportationDataList = new ArrayList<>();
         for (int i = 0; i < transportationModel.getRowCount(); i++) {
             List<String> row = new ArrayList<>();
             for (int j = 0; j < transportationModel.getColumnCount(); j++) {
                 row.add(transportationModel.getValueAt(i, j).toString());
             }
-            transportationDataList.add(row);
+            Expense.transportationData.add(row);
         }
 
-        ArrayList<List<String>> housingDataList = new ArrayList<>();
         for (int i = 0; i < housingModel.getRowCount(); i++) {
             List<String> row = new ArrayList<>();
             for (int j = 0; j < housingModel.getColumnCount(); j++) {
                 row.add(housingModel.getValueAt(i, j).toString());
             }
-            housingDataList.add(row);
+            Expense.housingData.add(row);
         }
 
-        ArrayList<List<String>> otherDataList = new ArrayList<>();
         for (int i = 0; i < otherModel.getRowCount(); i++) {
             List<String> row = new ArrayList<>();
             for (int j = 0; j < otherModel.getColumnCount(); j++) {
                 row.add(otherModel.getValueAt(i, j).toString());
             }
-            otherDataList.add(row);
+            Expense.otherData.add(row);
         }
-
+        
         // Export the tables using the selected date
         try {
-            Driver.exportTable(entertainmentDataList, Expense.expensesFolder, "entertainmentTable.txt");
-            Driver.exportTable(foodDataList, Expense.expensesFolder, "foodTable.txt");
-            Driver.exportTable(transportationDataList, Expense.expensesFolder, "transportationTable.txt");
-            Driver.exportTable(housingDataList, Expense.expensesFolder, "housingTable.txt");
-            Driver.exportTable(otherDataList, Expense.expensesFolder, "otherTable.txt");
+            Driver.exportTable(Expense.entertainmentData, Expense.expensesFolder, "entertainmentTable.txt", selectedDate);
+            Driver.exportTable(Expense.foodData, Expense.expensesFolder, "foodTable.txt", selectedDate);
+            Driver.exportTable(Expense.transportationData, Expense.expensesFolder, "transportationTable.txt", selectedDate);
+            Driver.exportTable(Expense.housingData, Expense.expensesFolder, "housingTable.txt", selectedDate);
+            Driver.exportTable(Expense.otherData, Expense.expensesFolder, "otherTable.txt", selectedDate);
 
             // Format the date string in MMMM, dd, yyyy format
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM dd, yyyy");
             String dateString = dateFormat.format(selectedDate);
             // Notify the user that the tables have been exported
             JOptionPane.showMessageDialog(null, "Tables exported successfully for " + dateString);
@@ -696,12 +701,12 @@ public class ExpensesPanel extends javax.swing.JPanel {
             // Notify the user of any errors during the export process
             JOptionPane.showMessageDialog(null, "Error exporting tables: " + ex.getMessage());
         }
-    }//GEN-LAST:event_saveButtonActionPerformed
+    }//GEN-LAST:event_saveExpenseButtonActionPerformed
 
     private void calculateDifferenceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateDifferenceButtonActionPerformed
         Expense.calculateDifference(visibleTable());
     }//GEN-LAST:event_calculateDifferenceButtonActionPerformed
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataButton;
     private javax.swing.JLabel backgroundImage;
@@ -721,11 +726,11 @@ public class ExpensesPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane housingScrollPane;
     private javax.swing.JTable housingTable;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JButton loadButton;
+    private javax.swing.JButton loadExpenseButton;
     private javax.swing.JButton otherButton;
     private javax.swing.JScrollPane otherScrollPane;
     private javax.swing.JTable otherTable;
-    private javax.swing.JButton saveButton;
+    private javax.swing.JButton saveExpenseButton;
     private javax.swing.JButton saveTableButton;
     private javax.swing.JLabel selectDateLabel;
     private javax.swing.JButton transportationButton;

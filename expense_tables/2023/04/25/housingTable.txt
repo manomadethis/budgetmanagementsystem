@@ -1,8 +1,0 @@
- Rent/Mortgage	0	0	0	
-Taxes	0	0	0	
-Water 	0	0	0	
-Gas	0	0	0	
-Electricity	0	0	0	
-Cable/Internet services	0	0	0	
-Insurance	0	0	0	
-Maintenance	100	50	50	
