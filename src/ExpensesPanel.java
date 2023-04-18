@@ -59,11 +59,11 @@ public class ExpensesPanel extends javax.swing.JPanel {
     }
 
     private void loadData() {
-        Expense.loadTableData(entertainmentTable, "entertainmentTable.txt", Expense.entertainmentData);
-        Expense.loadTableData(foodTable, "foodTable.txt", Expense.foodData);
-        Expense.loadTableData(housingTable, "housingTable.txt", Expense.housingData);
-        Expense.loadTableData(transportationTable, "transportationTable.txt", Expense.transportationData);
-        Expense.loadTableData(otherTable, "otherTable.txt", Expense.otherData);
+        Driver.loadTableData(entertainmentTable, Expense.expensesFolder, "entertainmentTable.txt", Expense.entertainmentData);
+        Driver.loadTableData(foodTable, Expense.expensesFolder, "foodTable.txt", Expense.foodData);
+        Driver.loadTableData(housingTable, Expense.expensesFolder, "housingTable.txt", Expense.housingData);
+        Driver.loadTableData(transportationTable, Expense.expensesFolder, "transportationTable.txt", Expense.transportationData);
+        Driver.loadTableData(otherTable, Expense.expensesFolder, "otherTable.txt", Expense.otherData);
     }
 
     /**
@@ -75,6 +75,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jCheckBox1 = new javax.swing.JCheckBox();
         expensesPanel = new javax.swing.JPanel();
         expensesLabel = new javax.swing.JLabel();
         selectDateLabel = new javax.swing.JLabel();
@@ -101,6 +102,9 @@ public class ExpensesPanel extends javax.swing.JPanel {
         addDataButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         calculateDifferenceButton = new javax.swing.JButton();
+        backgroundImage = new javax.swing.JLabel();
+
+        jCheckBox1.setText("jCheckBox1");
 
         setAutoscrolls(true);
 
@@ -211,6 +215,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
         entertainmentScrollPane.setAutoscrolls(true);
 
         entertainmentTable.setAutoCreateRowSorter(true);
+        entertainmentTable.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         entertainmentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Amusement Park", "0", "0", "0"},
@@ -401,6 +406,9 @@ public class ExpensesPanel extends javax.swing.JPanel {
         });
         expensesPanel.add(calculateDifferenceButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 550, -1, -1));
 
+        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/expenses_bg.jpg"))); // NOI18N
+        expensesPanel.add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 600));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -488,7 +496,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
                     }
                     try {
                         String filename = table.getName() + ".txt";
-                        Expense.exportTable(dataList, filename);
+                        Driver.exportTable(dataList, Expense.expensesFolder, filename);
                         JOptionPane.showMessageDialog(this, "Table has been saved successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                     } catch (IOException ex) {
                         ex.printStackTrace();
@@ -546,11 +554,11 @@ public class ExpensesPanel extends javax.swing.JPanel {
             housingModel.setRowCount(0);
             otherModel.setRowCount(0);
 
-            Expense.importTable(entertainmentModel, "entertainmentTable.txt", selectedDate);
-            Expense.importTable(foodModel, "foodTable.txt", selectedDate);
-            Expense.importTable(transportationModel, "transportationTable.txt", selectedDate);
-            Expense.importTable(housingModel, "housingTable.txt", selectedDate);
-            Expense.importTable(otherModel, "otherTable.txt", selectedDate);
+            Driver.importTable(entertainmentModel, Expense.expensesFolder, "entertainmentTable.txt", selectedDate);
+            Driver.importTable(foodModel, Expense.expensesFolder, "foodTable.txt", selectedDate);
+            Driver.importTable(transportationModel, Expense.expensesFolder, "transportationTable.txt", selectedDate);
+            Driver.importTable(housingModel, Expense.expensesFolder, "housingTable.txt", selectedDate);
+            Driver.importTable(otherModel, Expense.expensesFolder, "otherTable.txt", selectedDate);
 
             // Notify the user that the tables have been imported
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
@@ -673,11 +681,11 @@ public class ExpensesPanel extends javax.swing.JPanel {
 
         // Export the tables using the selected date
         try {
-            Expense.exportTable(entertainmentDataList, "entertainmentTable.txt");
-            Expense.exportTable(foodDataList, "foodTable.txt");
-            Expense.exportTable(transportationDataList, "transportationTable.txt");
-            Expense.exportTable(housingDataList, "housingTable.txt");
-            Expense.exportTable(otherDataList, "otherTable.txt");
+            Driver.exportTable(entertainmentDataList, Expense.expensesFolder, "entertainmentTable.txt");
+            Driver.exportTable(foodDataList, Expense.expensesFolder, "foodTable.txt");
+            Driver.exportTable(transportationDataList, Expense.expensesFolder, "transportationTable.txt");
+            Driver.exportTable(housingDataList, Expense.expensesFolder, "housingTable.txt");
+            Driver.exportTable(otherDataList, Expense.expensesFolder, "otherTable.txt");
 
             // Format the date string in MMMM, dd, yyyy format
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM, dd, yyyy");
@@ -696,6 +704,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDataButton;
+    private javax.swing.JLabel backgroundImage;
     private javax.swing.JButton calculateDifferenceButton;
     private com.toedter.calendar.JCalendar calendar;
     private javax.swing.JButton clearAllTablesButton;
@@ -711,6 +720,7 @@ public class ExpensesPanel extends javax.swing.JPanel {
     private javax.swing.JButton housingButton;
     private javax.swing.JScrollPane housingScrollPane;
     private javax.swing.JTable housingTable;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JButton loadButton;
     private javax.swing.JButton otherButton;
     private javax.swing.JScrollPane otherScrollPane;

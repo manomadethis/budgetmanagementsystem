@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import java.awt.Cursor;
@@ -30,80 +26,103 @@ public class IncomePanel extends javax.swing.JPanel {
 
         budgetPanel = new javax.swing.JPanel();
         incomeLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jTxtSrc = new javax.swing.JTextField();
-        jAmt = new javax.swing.JLabel();
-        jTxtAmt = new javax.swing.JTextField();
-        jAddButton = new javax.swing.JButton();
-        jDelButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jIncomeTable = new javax.swing.JTable();
+        sourceOfIncomeLabel = new javax.swing.JLabel();
+        incomeField = new javax.swing.JTextField();
+        amountLabel = new javax.swing.JLabel();
+        amountField = new javax.swing.JTextField();
+        addButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        incomePane = new javax.swing.JScrollPane();
+        incomeTable = new javax.swing.JTable();
         calendar = new com.toedter.calendar.JCalendar();
         jLabel2 = new javax.swing.JLabel();
+        saveButton = new javax.swing.JButton();
+        backgroundImage = new javax.swing.JLabel();
 
         budgetPanel.setBackground(new java.awt.Color(255, 255, 255));
         budgetPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        incomeLabel.setFont(new java.awt.Font("Sinhala MN", 2, 18)); // NOI18N
+        incomeLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         incomeLabel.setText("Income");
-        budgetPanel.add(incomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 70, 50));
+        budgetPanel.add(incomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 70, 40));
 
-        jLabel1.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
-        jLabel1.setText("Source of Income ");
-        budgetPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 130, 30));
-        budgetPanel.add(jTxtSrc, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 210, 30));
+        sourceOfIncomeLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        sourceOfIncomeLabel.setText("Source of Income:");
+        budgetPanel.add(sourceOfIncomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 130, 30));
 
-        jAmt.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
-        jAmt.setText("Amount");
-        budgetPanel.add(jAmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, 80, 30));
-        budgetPanel.add(jTxtAmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 210, 30));
+        incomeField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        budgetPanel.add(incomeField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 210, 30));
 
-        jAddButton.setBackground(new java.awt.Color(51, 255, 204));
-        jAddButton.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
-        jAddButton.setText("ADD");
-        jAddButton.addActionListener(new java.awt.event.ActionListener() {
+        amountLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        amountLabel.setText("Amount:");
+        budgetPanel.add(amountLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 80, 30));
+
+        amountField.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        budgetPanel.add(amountField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 210, 30));
+
+        addButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        addButton.setBackground(new java.awt.Color(57, 255, 50));
+        addButton.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        addButton.setText("ADD");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAddButtonActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
-        budgetPanel.add(jAddButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 90, 30));
+        budgetPanel.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 90, 30));
 
-        jDelButton.setBackground(new java.awt.Color(255, 51, 51));
-        jDelButton.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
-        jDelButton.setText("DELETE");
-        jDelButton.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        deleteButton.setBackground(new java.awt.Color(255, 51, 51));
+        deleteButton.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        deleteButton.setText("DELETE");
+        deleteButton.setToolTipText("Type in ");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDelButtonActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
-        budgetPanel.add(jDelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 100, 30));
+        budgetPanel.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 100, 30));
 
-        jScrollPane1.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
+        incomePane.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
 
-        jIncomeTable.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
-        jIncomeTable.setModel(new javax.swing.table.DefaultTableModel(
+        incomeTable.setAutoCreateRowSorter(true);
+        incomeTable.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
+        incomeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Source of Income ", "Amount"
+                "Source of Income ", "Amount", "Date"
             }
         ));
-        jScrollPane1.setViewportView(jIncomeTable);
-        if (jIncomeTable.getColumnModel().getColumnCount() > 0) {
-            jIncomeTable.getColumnModel().getColumn(1).setResizable(false);
-        }
+        incomeTable.setToolTipText("Double click to edit data");
+        incomePane.setViewportView(incomeTable);
 
-        budgetPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 490, 290));
+        budgetPanel.add(incomePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 490, 290));
 
         calendar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         calendar.setToolTipText("Select a date");
-        calendar.setDecorationBackgroundColor(new java.awt.Color(105, 255, 222));
-        budgetPanel.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 330, 190));
+        calendar.setDecorationBackgroundColor(new java.awt.Color(51, 255, 255));
+        budgetPanel.add(calendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 100, 240, 150));
 
-        jLabel2.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
-        jLabel2.setText("Calendar");
-        budgetPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 130, 30));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Select Date:");
+        budgetPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 100, 30));
+
+        saveButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        saveButton.setBackground(new java.awt.Color(51, 255, 255));
+        saveButton.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        saveButton.setText("SAVE");
+        saveButton.setToolTipText("Type in ");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+        budgetPanel.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 100, 30));
+
+        backgroundImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/income_bg.jpg"))); // NOI18N
+        budgetPanel.add(backgroundImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(-480, -340, 1380, 940));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -127,12 +146,12 @@ public class IncomePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jAddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddButtonActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         // TODO add your handling code here:
         // Get the contents of the text field
         
-        String textSource = jTxtSrc.getText();
-        String textAmount = jTxtAmt.getText();
+        String textSource = incomeField.getText();
+        String textAmount = amountField.getText();
         
         // Check if the text field is not empty
         
@@ -142,68 +161,66 @@ public class IncomePanel extends javax.swing.JPanel {
             String [] rowData = {textSource, textAmount};
             
             // Add the row to the table
-            DefaultTableModel model = (DefaultTableModel) jIncomeTable.getModel();
+            DefaultTableModel model = (DefaultTableModel) incomeTable.getModel();
             
             model.addRow(rowData);
              
              // Clear the text fields
-            jTxtSrc.setText("");
-            jTxtAmt.setText("");
+            incomeField.setText("");
+            amountField.setText("");
         } else {
         // Display an error message
         JOptionPane.showMessageDialog(this, "Please enter text in both fields.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    }//GEN-LAST:event_jAddButtonActionPerformed
+    }//GEN-LAST:event_addButtonActionPerformed
 
-    private void jDelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDelButtonActionPerformed
-       // Get the contents of the text fields
-    String textSource = jTxtSrc.getText();
-    String textAmount = jTxtAmt.getText();
-    
-    // Check if the text fields are not empty
-    if (!textSource.isEmpty() && !textAmount.isEmpty()) {
-        // Get the table model
-        DefaultTableModel model = (DefaultTableModel) jIncomeTable.getModel();
-        
-        // Loop through the rows of the table
-        for (int i = 0; i < model.getRowCount(); i++) {
-            // Get the text in the source and amount columns of the current row
-            String sourceText = (String) model.getValueAt(i, 0);
-            String amountText = (String) model.getValueAt(i, 1);
-            
-            // Check if both source and amount match the text fields
-            if (sourceText.equals(textSource) && amountText.equals(textAmount)) {
-                // Remove the current row from the table
-                model.removeRow(i);
-                
-                // Decrement the row index to compensate for the removed row
-                i--;
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // Get the selected row index
+        int selectedRowIndex = incomeTable.getSelectedRow();
+
+        // Check if a row is selected
+        if (selectedRowIndex != -1) {
+            // Show a confirmation dialog to confirm the deletion
+            int confirmation = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this row?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            // Check if the user confirmed the deletion
+            if (confirmation == JOptionPane.YES_OPTION) {
+                // Get the table model
+                DefaultTableModel model = (DefaultTableModel) incomeTable.getModel();
+
+                // Remove the selected row from the table
+                model.removeRow(selectedRowIndex);
+
+                // Clear the text fields
+                incomeField.setText("");
+                amountField.setText("");
             }
+        } else {
+            // Display an error message
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        // Clear the text fields
-        jTxtSrc.setText("");
-        jTxtAmt.setText("");
-    } else {
-        // Display an error message
-        JOptionPane.showMessageDialog(this, "Please enter text in both fields.", "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
-    //GEN-LAST:event_jDelButtonActionPerformed
+//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JTextField amountField;
+    private javax.swing.JLabel amountLabel;
+    private javax.swing.JLabel backgroundImage;
     private javax.swing.JPanel budgetPanel;
     private com.toedter.calendar.JCalendar calendar;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JTextField incomeField;
     private javax.swing.JLabel incomeLabel;
-    private javax.swing.JButton jAddButton;
-    private javax.swing.JLabel jAmt;
-    private javax.swing.JButton jDelButton;
-    private javax.swing.JTable jIncomeTable;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane incomePane;
+    private javax.swing.JTable incomeTable;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTxtAmt;
-    private javax.swing.JTextField jTxtSrc;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JLabel sourceOfIncomeLabel;
     // End of variables declaration//GEN-END:variables
 }
