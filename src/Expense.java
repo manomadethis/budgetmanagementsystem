@@ -49,18 +49,26 @@ public class Expense {
     public static void calculateDifference(javax.swing.JTable table) {
         javax.swing.table.TableModel model = table.getModel();
         for (int i = 0; i < model.getRowCount(); i++) {
-            int budget = Integer.parseInt(model.getValueAt(i, 1).toString());
-            int actualSpent = Integer.parseInt(model.getValueAt(i, 2).toString());
-            int difference = budget - actualSpent;
+            Number budget = null;
+            Number actualSpent = null;
+            try{
+                budget = Integer.parseInt(model.getValueAt(i, 1).toString());
+                actualSpent = Integer.parseInt(model.getValueAt(i, 2).toString());
+            } catch(NumberFormatException e){
+                // if parsing as int fails, try parsing as float
+                budget = Float.parseFloat(model.getValueAt(i, 1).toString());
+                actualSpent = Float.parseFloat(model.getValueAt(i, 2).toString());
+            }
+            float difference = budget.floatValue() - actualSpent.floatValue();
             model.setValueAt(difference, i, 3);
-
+    
             javax.swing.table.DefaultTableCellRenderer renderer = new javax.swing.table.DefaultTableCellRenderer();
             renderer.setForeground(table.getForeground());
             table.getColumnModel().getColumn(3).setCellRenderer(renderer);
             CurrencyRenderer.formatCurrencyColumns(table, 1, 2, 3);
-            
         }
     }
+    
 
     public static void clearTableData(DefaultTableModel model) {
         int rowCount = model.getRowCount();

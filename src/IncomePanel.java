@@ -42,7 +42,7 @@ public class IncomePanel extends javax.swing.JPanel {
         amountField = new javax.swing.JTextField();
         addButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        incomePane = new javax.swing.JScrollPane();
+        incomeScrollPane = new javax.swing.JScrollPane();
         incomeTable = new javax.swing.JTable();
         calendar = new com.toedter.calendar.JCalendar();
         jLabel2 = new javax.swing.JLabel();
@@ -96,7 +96,7 @@ public class IncomePanel extends javax.swing.JPanel {
         });
         budgetPanel.add(deleteButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 120, 30));
 
-        incomePane.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
+        incomeScrollPane.setFont(new java.awt.Font("Sinhala MN", 1, 14)); // NOI18N
 
         incomeTable.setAutoCreateRowSorter(true);
         incomeTable.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
@@ -110,9 +110,9 @@ public class IncomePanel extends javax.swing.JPanel {
         ));
         incomeTable.setToolTipText("Double click to edit data");
         CurrencyRenderer.formatCurrencyColumns(incomeTable, 1);
-        incomePane.setViewportView(incomeTable);
+        incomeScrollPane.setViewportView(incomeTable);
 
-        budgetPanel.add(incomePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 490, 290));
+        budgetPanel.add(incomeScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 490, 290));
 
         calendar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         calendar.setToolTipText("Select a date");
@@ -356,7 +356,7 @@ public class IncomePanel extends javax.swing.JPanel {
             // Notify the user of any errors during the export process
             JOptionPane.showMessageDialog(null, "Error exporting the table: " + ex.getMessage());
         }
-    }//GEN-LAST:event_saveIncomeButtonActionPerformed
+    }                                                
 
     private void clearTableButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearTableButtonActionPerformed
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to clear all table data?", "Confirm Clear", JOptionPane.YES_NO_OPTION);
@@ -378,7 +378,7 @@ public class IncomePanel extends javax.swing.JPanel {
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextField incomeField;
     private javax.swing.JLabel incomeLabel;
-    private javax.swing.JScrollPane incomePane;
+    private javax.swing.JScrollPane incomeScrollPane;
     private javax.swing.JTable incomeTable;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loadIncomeButton;
